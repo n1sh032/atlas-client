@@ -1,12 +1,25 @@
+import os
+import subprocess
+
 def main():
-    print("JARVIS-lite is online. Type 'exit' to quit.")
+    print("atlas is online. type exit to quit")
     while True:
-        user_input = input("You: ")
-        if user_input.lower() == "exit":
-            print("Shutting down.")
+        cmd = input("You: ").strip().lower()
+
+        if cmd == "exit":
+            print("shutting down")
             break
-        print(f"Jarvis: I heard '{user_input}'")
 
+        elif cmd == "open notepad":
+            subprocess.Popen(["notepad.exe"])
+            print("Atlas: opening notepad")
 
-if __name__ == "__main__":
-    main()
+        elif cmd == "open downloads":
+            dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
+            os.startfile(dl_path)
+            print("Atlas: opening downloads folder")
+
+        else:
+            print("Atlas: not sure of that command yet")
+
+main()
