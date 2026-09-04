@@ -22,6 +22,9 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc
 from docx import Document
+import pygetwindow as gw
+import pyautogui
+import time
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -115,6 +118,22 @@ def find_and_open_app(query):
         if n == best:
             os.startfile(p)
             return f"opening {n}"
+
+def send_discord_message(message):
+    windows = [w for w in gw.getAllTitles() if "discord" in w.lower()]
+
+    if not windows:
+        return "discord doesnt seem to be open, opening it first"
+
+    win = gw.getWindowsWithTitle(windows[0])[0]
+    win.activate()
+    time.sleep(1)  # give windows time to actually bring it to front
+
+    pyautogui.typewrite(message, interval=0.02)
+    pyautogui.press("enter")
+    return f"sent to discord: {message}"
+
+
 
 
 def close_app(query):
@@ -277,6 +296,9 @@ unknown
 if its open_file, reply like this instead:
 open_file: <short search term for the file>
 
+if user wants to send a discord message, reply like this:
+discord: <the message to send>
+
 if its open_app, reply like this instead:
 open_app: <name of the app>
 
@@ -400,6 +422,9 @@ def main():
             print("Atlas:", draft_document(topic))
         elif action in actions:
             print("Atlas:", actions[action]())
+        elif action.startswith("discord:"):
+            message = action.split(":", 1)[1].strip()
+            print("Atlas:", send_discord_message(message))
         else:
             print("Atlas: idk that command yet")
 
