@@ -1,5 +1,6 @@
 import os
 import subprocess
+import difflib
 from dotenv import load_dotenv
 from google import genai
 
@@ -36,8 +37,39 @@ def open_explorer():
     os.startfile(os.path.expanduser("~"))
     return "opening file explorer"
 
+def find_and_open_file(query):
+    # just check these 3 folders for now, good enough
+    folders = [
+        os.path.join(os.path.expanduser("~"), "Desktop"),
+        os.path.join(os.path.expanduser("~"), "Documents"),
+        os.path.join(os.path.expanduser("~"), "Downloads"),
+    ]
 
-# action name -> function
+    files = []
+    for f in folders:
+        if not os.path.exists(f):
+            continue
+        for name in os.listdir(f):
+            full = os.path.join(f, name)
+            if os.path.isfile(full):
+                files.append((name, full))
+
+    if not files:
+        return "no files found to search"
+
+    names = [n for n, p in files]
+    match = difflib.get_close_matches(query, names, n=1, cutoff=0.3)
+
+    if not match:
+        return f"couldnt find anything matching '{query}'"
+
+    # find the full path that goes with the matched name
+    for n, p in files:
+        if n == match[0]:
+            os.startfile(p)
+            return f"opening {n}"
+
+
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
@@ -48,7 +80,6 @@ actions = {
     "explorer": open_explorer,
 }
 
-# exact phrases so it doesnt need to call gemini every time
 exact = {
     "open notepad": "notepad",
     "open downloads": "downloads",
@@ -63,10 +94,14 @@ exact = {
 def ask_gemini(text):
     opts = "\n".join(actions.keys())
     prompt = f"""you are a command parser for atlas.
-reply with ONLY one word from this list, nothing else:
+if user wants to open an app, reply with ONLY one word from this list:
 
 {opts}
+open_file
 unknown
+
+if its open_file, reply like this instead:
+open_file: <short search term for the file>
 
 message: "{text}"
 """
@@ -88,7 +123,10 @@ def main():
         else:
             action = ask_gemini(cmd)
 
-        if action in actions:
+        if action.startswith("open_file:"):
+            query = action.split(":", 1)[1].strip()
+            print("Atlas:", find_and_open_file(query))
+        elif action in actions:
             print("Atlas:", actions[action]())
         else:
             print("Atlas: idk that command yet")
