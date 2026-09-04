@@ -3,12 +3,18 @@ import subprocess
 import difflib
 import pickle
 import dateparser
+import numpy as np
+import sys
+import pyaudiowpatch as pyaudio
+sys.modules["pyaudio"] = pyaudio
+import speech_recognition as sr
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
+from openwakeword.model import Model
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -99,7 +105,6 @@ def schedule_meeting(when_text, title):
 
     start = dateparser.parse(when_text)
     if not start:
-        # couldnt figure out the time, just default to 1hr from now
         start = datetime.now() + timedelta(hours=1)
 
     end = start + timedelta(hours=1)
@@ -157,10 +162,54 @@ message: "{text}"
     return res.text.strip().lower()
 
 
-def main():
-    print("atlas is online. type exit to quit")
+oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
+recognizer = sr.Recognizer()
+
+def listen_for_wakeword():
+    audio = pyaudio.PyAudio()
+    stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
+                         input=True, frames_per_buffer=1280)
+
+    print("listening for 'hey jarvis'...")
+
     while True:
-        cmd = input("You: ").strip().lower()
+        chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
+        prediction = oww_model.predict(chunk)
+
+        for wakeword, score in prediction.items():
+            if score > 0.5:
+                stream.stop_stream()
+                stream.close()
+                audio.terminate()
+                return
+
+
+def listen_for_command():
+    with sr.Microphone() as source:
+        print("listening for command...")
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        audio = recognizer.listen(source, timeout=5, phrase_time_limit=6)
+
+    try:
+        text = recognizer.recognize_google(audio)
+        print(f"heard: {text}")
+        return text.lower()
+    except sr.UnknownValueError:
+        print("atlas: didnt catch that")
+        return None
+    except sr.WaitTimeoutError:
+        print("atlas: no command heard, going back to sleep")
+        return None
+
+
+def main():
+    print("atlas is online (voice mode)")
+    while True:
+        listen_for_wakeword()
+        cmd = listen_for_command()
+
+        if not cmd:
+            continue
 
         if cmd == "exit":
             print("shutting down")
