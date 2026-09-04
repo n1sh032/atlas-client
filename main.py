@@ -29,13 +29,20 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc
 from docx import Document
+import pyttsx3
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 HISTORY_FILE = "atlas_memory.json"
-
+def speak(text):
+    print("Atlas:", text)
+    engine = pyttsx3.init()
+    engine.setProperty("rate", 175)
+    engine.say(text)
+    engine.runAndWait()
+    engine.stop()
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
@@ -210,7 +217,7 @@ def google_search(query):
 
 def draft_document(topic):
     res = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.1-flash-lite",
         contents=f"write the following, just the content, no preamble: {topic}"
     )
     content = res.text.strip()
@@ -473,7 +480,7 @@ def talk_to_atlas(user_text):
     chat_history.append({"role": "user", "parts": [{"text": user_text}]})
 
     res = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.1-flash-lite",
         contents=chat_history,
         config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
     )
@@ -600,7 +607,7 @@ def main():
             break
 
         reply = talk_to_atlas_safe(cmd)
-        print("Atlas:", reply)
+        speak(reply)
 
 
 if __name__ == "__main__":
