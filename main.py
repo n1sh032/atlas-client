@@ -1,11 +1,19 @@
 import os
 import subprocess
 import difflib
+import pickle
+import dateparser
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from google.auth.transport.requests import Request
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 
 def open_notepad():
@@ -38,7 +46,6 @@ def open_explorer():
     return "opening file explorer"
 
 def find_and_open_file(query):
-    # just check these 3 folders for now, good enough
     folders = [
         os.path.join(os.path.expanduser("~"), "Desktop"),
         os.path.join(os.path.expanduser("~"), "Documents"),
@@ -63,11 +70,48 @@ def find_and_open_file(query):
     if not match:
         return f"couldnt find anything matching '{query}'"
 
-    # find the full path that goes with the matched name
     for n, p in files:
         if n == match[0]:
             os.startfile(p)
             return f"opening {n}"
+
+
+def get_calendar_service():
+    creds = None
+    if os.path.exists("token.pickle"):
+        with open("token.pickle", "rb") as f:
+            creds = pickle.load(f)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open("token.pickle", "wb") as f:
+            pickle.dump(creds, f)
+
+    return build("calendar", "v3", credentials=creds)
+
+
+def schedule_meeting(when_text, title):
+    service = get_calendar_service()
+
+    start = dateparser.parse(when_text)
+    if not start:
+        # couldnt figure out the time, just default to 1hr from now
+        start = datetime.now() + timedelta(hours=1)
+
+    end = start + timedelta(hours=1)
+
+    event = {
+        "summary": title,
+        "start": {"dateTime": start.isoformat(), "timeZone": "Asia/Singapore"},
+        "end": {"dateTime": end.isoformat(), "timeZone": "Asia/Singapore"},
+    }
+
+    created = service.events().insert(calendarId="primary", body=event).execute()
+    return f"scheduled '{title}' for {start.strftime('%d %b, %I:%M %p')}, check calendar: {created.get('htmlLink')}"
 
 
 actions = {
@@ -98,10 +142,14 @@ if user wants to open an app, reply with ONLY one word from this list:
 
 {opts}
 open_file
+schedule_meeting
 unknown
 
 if its open_file, reply like this instead:
 open_file: <short search term for the file>
+
+if its schedule_meeting, reply like this instead:
+schedule_meeting: <when they said, keep it natural, eg "tomorrow at 3pm">|<short title for the meeting>
 
 message: "{text}"
 """
@@ -126,6 +174,10 @@ def main():
         if action.startswith("open_file:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", find_and_open_file(query))
+        elif action.startswith("schedule_meeting:"):
+            details = action.split(":", 1)[1].strip()
+            when_text, title = details.split("|", 1)
+            print("Atlas:", schedule_meeting(when_text.strip(), title.strip()))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
