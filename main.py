@@ -16,6 +16,7 @@ import pyautogui
 import pyaudiowpatch as pyaudio
 sys.modules["pyaudio"] = pyaudio
 import speech_recognition as sr
+import pyttsx3
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
@@ -29,20 +30,14 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc
 from docx import Document
-import pyttsx3
+
+import config
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
-HISTORY_FILE = "atlas_memory.json"
-def speak(text):
-    print("Atlas:", text)
-    engine = pyttsx3.init()
-    engine.setProperty("rate", 175)
-    engine.say(text)
-    engine.runAndWait()
-    engine.stop()
+
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
@@ -133,7 +128,7 @@ def find_and_open_file(query):
         return "no files to search"
 
     names = [n for n, p in files]
-    match = difflib.get_close_matches(query, names, n=1, cutoff=0.45)
+    match = difflib.get_close_matches(query, names, n=1, cutoff=config.file_match_cutoff)
     if not match:
         return f"couldnt find anything matching '{query}'"
 
@@ -173,7 +168,7 @@ def find_and_open_app(query):
             return f"opening {n}"
 
     names = [n for n, p in shortcuts]
-    match = difflib.get_close_matches(query, names, n=3, cutoff=0.5)
+    match = difflib.get_close_matches(query, names, n=3, cutoff=config.app_open_cutoff)
     if not match:
         return f"couldnt find an app matching '{query}'"
 
@@ -199,7 +194,7 @@ def close_app(query):
             subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
             return f"closed {orig}"
 
-    match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=0.6)
+    match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
     if not match:
         return f"couldnt find a running app matching '{query}'"
 
@@ -217,12 +212,12 @@ def google_search(query):
 
 def draft_document(topic):
     res = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
+        model=config.draft_model,
         contents=f"write the following, just the content, no preamble: {topic}"
     )
     content = res.text.strip()
 
-    drafts_folder = os.path.join(os.path.expanduser("~"), "Documents", "atlas drafts")
+    drafts_folder = os.path.join(os.path.expanduser("~"), "Documents", config.drafts_folder)
     os.makedirs(drafts_folder, exist_ok=True)
 
     safe_name = "".join(c for c in topic if c.isalnum() or c == " ").strip()[:40]
@@ -267,8 +262,8 @@ def schedule_meeting(when_text, title):
 
     event = {
         "summary": title,
-        "start": {"dateTime": start.isoformat(), "timeZone": "Asia/Singapore"},
-        "end": {"dateTime": end.isoformat(), "timeZone": "Asia/Singapore"},
+        "start": {"dateTime": start.isoformat(), "timeZone": config.timezone},
+        "end": {"dateTime": end.isoformat(), "timeZone": config.timezone},
     }
 
     created = service.events().insert(calendarId="primary", body=event).execute()
@@ -373,6 +368,18 @@ def send_app_shortcut(app_name, action):
     return f"sent {action} in {app_name}"
 
 
+def speak(text):
+    print("Atlas:", text)
+    engine = pyttsx3.init()
+    engine.setProperty("rate", config.tts_rate)
+    if config.tts_voice_index is not None:
+        voices = engine.getProperty("voices")
+        engine.setProperty("voice", voices[config.tts_voice_index].id)
+    engine.say(text)
+    engine.runAndWait()
+    engine.stop()
+
+
 # tool declarations, telling gemini what it can call and what info each needs
 tools = [
     {"name": "open_app", "description": "opens an app by name eg chrome, spotify, discord",
@@ -435,180 +442,3 @@ tool_functions = {
     "schedule_meeting": lambda when_text, title: schedule_meeting(when_text, title),
     "google_search": lambda query: google_search(query),
     "set_volume": lambda level: set_volume(level),
-    "set_brightness": lambda level: set_brightness(level),
-    "mute_toggle": lambda: mute_toggle(),
-    "lock_screen": lambda: lock_screen(),
-    "draft_document": lambda topic: draft_document(topic),
-    "type_in_notepad": lambda text: type_in_notepad(text),
-    "type_in_discord": lambda text: type_in_discord(text),
-    "open_downloads": lambda: open_downloads(),
-    "open_explorer": lambda: open_explorer(),
-    "skip_song": lambda: skip_song(),
-    "previous_song": lambda: previous_song(),
-    "play_pause": lambda: play_pause(),
-    "send_app_shortcut": lambda app_name, action: send_app_shortcut(app_name, action),
-}
-
-
-def load_history():
-    if os.path.exists(HISTORY_FILE):
-        try:
-            with open(HISTORY_FILE, "r") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
-
-def save_history():
-    try:
-        with open(HISTORY_FILE, "w") as f:
-            json.dump(chat_history, f)
-    except Exception as e:
-        print(f"atlas: couldnt save memory ({e})")
-
-
-chat_history = load_history()
-
-# basically its personality, told to gemini once instead of stuffing it in every message
-system_msg = ("you are atlas, the users desktop assistant on windows. talk casually, not robotic. "
-              "only use a tool if they actually want something done on the pc, otherwise just reply normally. "
-              "remember stuff from earlier in the convo, including past sessions, so you can handle follow ups "
-              "like 'time it' or 'do that again' or 'what did i say about x'. "
-              "keep it short, 1-3 sentences, this basically gets read out loud")
-
-def talk_to_atlas(user_text):
-    chat_history.append({"role": "user", "parts": [{"text": user_text}]})
-
-    res = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        contents=chat_history,
-        config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
-    )
-
-    parts = res.candidates[0].content.parts
-    reply = ""
-    did_stuff = []
-
-    for p in parts:
-        call = getattr(p, "function_call", None)
-        if call:
-            fn = call.name
-            args = dict(call.args) if call.args else {}
-            if fn in tool_functions:
-                try:
-                    r = tool_functions[fn](**args)
-                except Exception as e:
-                    r = f"that broke: {e}"
-                did_stuff.append(f"{fn} -> {r}")
-
-        if getattr(p, "text", None):
-            reply += p.text
-
-    chat_history.append({"role": "model", "parts": [{"text": reply or " ; ".join(did_stuff) or "ok"}]})
-
-    if len(chat_history) > 60:
-        del chat_history[:2]  # dont let this grow forever
-
-    save_history()
-
-    if reply:
-        return reply
-    if did_stuff:
-        return " and ".join(x.split(" -> ", 1)[1] for x in did_stuff)
-    return "done"
-
-
-def talk_to_atlas_safe(user_text):
-    for attempt in range(3):
-        try:
-            return talk_to_atlas(user_text)
-        except Exception as e:
-            print(f"atlas: gemini's being slow, retrying... ({e})")
-            time.sleep(10)
-    return "cant reach gemini rn, try again in a bit"
-
-
-oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
-recognizer = sr.Recognizer()
-recognizer.pause_threshold = 1.8
-
-def listen_for_wakeword():
-    audio = pyaudio.PyAudio()
-    stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
-                         input=True, frames_per_buffer=1280)
-
-    print("listening for 'hey jarvis'...")
-
-    for _ in range(5):
-        stream.read(1280)  # mic spikes on startup, throw these away
-
-    hits = 0
-    try:
-        while True:
-            chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
-            pred = oww_model.predict(chunk)
-            best = max(pred.values(), default=0)
-
-            if best > 0.9:
-                hits += 1
-                if hits >= 3:
-                    return
-            else:
-                hits = 0
-    finally:
-        stream.stop_stream()
-        stream.close()
-        audio.terminate()
-
-
-def listen_for_command():
-    with sr.Microphone() as source:
-        print("listening for command...")
-        recognizer.adjust_for_ambient_noise(source, duration=0.5)
-        try:
-            audio = recognizer.listen(source, timeout=5, phrase_time_limit=20)
-        except sr.WaitTimeoutError:
-            print("atlas: didnt hear anything, going back to sleep")
-            return None
-
-    try:
-        text = recognizer.recognize_google(audio)
-        print(f"heard: {text}")
-        return text
-    except sr.UnknownValueError:
-        print("atlas: didnt catch that")
-        return None
-    except sr.WaitTimeoutError:
-        print("atlas: didnt hear anything, going back to sleep")
-        return None
-
-
-def main():
-    print("atlas is online (voice mode)")
-    while True:
-        try:
-            listen_for_wakeword()
-            cmd = listen_for_command()
-        except KeyboardInterrupt:
-            print("shutting down")
-            save_history()
-            break
-        except Exception as e:
-            print(f"atlas: listening broke ({e}), trying again")
-            time.sleep(2)
-            continue
-
-        if not cmd:
-            continue
-
-        if cmd.strip().lower() == "exit":
-            print("shutting down")
-            save_history()
-            break
-
-        reply = talk_to_atlas_safe(cmd)
-        speak(reply)
-
-
-if __name__ == "__main__":
-    main()
