@@ -3,8 +3,8 @@
 
 import time
 
-from voice import listen_for_wakeword, listen_for_command, speak
-from assistant import talk_to_atlas_safe, save_history
+from src.voice import listen_for_wakeword, listen_for_command, speak
+from src.assistant import talk_to_atlas_safe, save_history
 
 
 def main():

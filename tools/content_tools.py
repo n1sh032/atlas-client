@@ -6,8 +6,8 @@ import webbrowser
 from urllib.parse import quote_plus
 from docx import Document
 
-import config
-from gemini_client import client
+from src import config
+from src.gemini_client import client
 
 
 def google_search(query):

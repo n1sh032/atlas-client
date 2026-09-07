@@ -9,8 +9,7 @@ import pygetwindow as gw
 import pyautogui
 import psutil
 
-import config
-
+from src import config
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])

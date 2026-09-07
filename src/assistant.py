@@ -3,16 +3,13 @@
 
 import json
 import os
+from src import config
+from src.gemini_client import client
 
-import config
-from gemini_client import client
-
-import file_tools
-import system_tools
-import content_tools
-import calendar_tools
-
-
+from tools import file_tools
+from tools import system_tools
+from tools import content_tools
+from tools import calendar_tools
 # telling gemini what functions it can call and what info each needs
 tools = [
     {"name": "open_app", "description": "opens an app by name eg chrome, spotify, discord",
