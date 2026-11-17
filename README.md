@@ -24,7 +24,7 @@ python -m venv .venv
 Install the dependencies:
 
 ```powershell
-pip install google-genai python-dotenv numpy psutil pygetwindow pyautogui pyaudiowpatch SpeechRecognition dateparser google-auth-oauthlib google-api-python-client openwakeword onnxruntime pycaw comtypes screen-brightness-control python-docx pyttsx3
+pip install -r requirements.txt
 ```
 
 If PowerShell blocks activation, run this once in an administrator PowerShell window or use the virtual environment's Python directly:
@@ -74,7 +74,7 @@ python -m test.wake_test
 - “Open Notepad”
 - “Open Camera”
 - “Open Spotify”
-- “Close Discord”
+- “Close Discord” (uses the exact app name and asks its single visible window to close)
 - “Open the budget spreadsheet”
 - “Open my Downloads folder”
 

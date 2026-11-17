@@ -3,6 +3,9 @@
 
 import json
 import os
+import time
+from tempfile import NamedTemporaryFile
+from google.genai.errors import APIError
 from src import config
 from src.gemini_client import client
 
@@ -99,11 +102,19 @@ def load_history():
 
 
 def save_history():
+    temporary = None
     try:
-        with open(config.memory_file, "w") as f:
+        folder = os.path.dirname(os.path.abspath(config.memory_file))
+        with NamedTemporaryFile(mode="w", dir=folder, delete=False) as f:
+            temporary = f.name
             json.dump(chat_history, f)
+        os.replace(temporary, config.memory_file)
+        temporary = None
     except Exception as e:
         print(f"atlas: couldnt save memory ({e})")
+    finally:
+        if temporary and os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 chat_history = load_history()
@@ -117,14 +128,23 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
 
 
 def talk_to_atlas(user_text):
-    chat_history.append({"role": "user", "parts": [{"text": user_text}]})
+    user_message = {"role": "user", "parts": [{"text": user_text}]}
 
-    res = client.models.generate_content(
-        model=config.gemini_model,
-        contents=chat_history,
-        config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
-    )
+    for attempt in range(3):
+        try:
+            res = client.models.generate_content(
+                model=config.gemini_model,
+                contents=[*chat_history, user_message],
+                config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
+            )
+            break
+        except APIError as e:
+            if attempt == 2 or getattr(e, "code", None) not in {429, 500, 502, 503, 504}:
+                raise
+            time.sleep(2 ** attempt)
 
+    if not res.candidates or not res.candidates[0].content or not res.candidates[0].content.parts:
+        return "Gemini did not return a reply."
     parts = res.candidates[0].content.parts
     reply = ""
     did_stuff = []
@@ -140,30 +160,28 @@ def talk_to_atlas(user_text):
                 except Exception as e:
                     r = f"that broke: {e}"
                 did_stuff.append(f"{fn} -> {r}")
+            else:
+                did_stuff.append(f"{fn} -> That action is unavailable.")
 
         if getattr(p, "text", None):
             reply += p.text
 
-    chat_history.append({"role": "model", "parts": [{"text": reply or " ; ".join(did_stuff) or "ok"}]})
+    if did_stuff:
+        reply = " and ".join(result.split(" -> ", 1)[1] for result in did_stuff)
+    reply = reply or "Gemini did not return a reply."
+    chat_history.extend([user_message, {"role": "model", "parts": [{"text": reply}]}])
 
     if len(chat_history) > config.chat_history_cap:
         del chat_history[:2]  # dont let this grow forever
 
     save_history()
 
-    if reply:
-        return reply
-    if did_stuff:
-        return " and ".join(x.split(" -> ", 1)[1] for x in did_stuff)
-    return "done"
+    return reply
 
 
 def talk_to_atlas_safe(user_text):
-    import time
-    for attempt in range(3):
-        try:
-            return talk_to_atlas(user_text)
-        except Exception as e:
-            print(f"atlas: gemini's being slow, retrying... ({e})")
-            time.sleep(10)
-    return "cant reach gemini rn, try again in a bit"
+    try:
+        return talk_to_atlas(user_text)
+    except Exception as e:
+        print(f"atlas: couldn't process the command ({type(e).__name__})")
+        return "I couldn't finish that command."
