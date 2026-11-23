@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Atlas</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="logo">Atlas</div>
+        <p id="connection">Connecting…</p>
+      </header>
+      <h1>Your desktop, in conversation.</h1>
+      <p class="lead">
+        Ask a question or give Atlas a specific task. Review the reply here and
+        keep control of desktop actions.
+      </p>
+      <p id="status" role="status">Connecting…</p>
+      <div class="layout">
+        <section class="panel" aria-label="Workspace">
+          <form id="command">
+            <label for="message">Message</label
+            ><textarea
+              id="message"
+              maxlength="4000"
+              placeholder="Open Notepad, or help me think through an idea"
+              required
+            ></textarea>
+            <label class="inline"
+              ><input id="allow" type="checkbox" /> Allow desktop actions for
+              this message</label
+            >
+            <p class="hint">
+              Actions can type into apps, change settings and create calendar
+              events. Keep the intended application in view.
+            </p>
+            <div class="actions">
+              <button data-action type="submit">Send message</button
+              ><button data-action type="button" id="listen" class="secondary">
+                Use microphone
+              </button>
+            </div>
+          </form>
+        </section>
+        <section class="panel">
+          <h2>Conversation</h2>
+          <div id="output" role="log" aria-live="polite">
+            <p class="hint">Your replies appear here.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

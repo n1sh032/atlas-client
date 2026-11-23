@@ -59,3 +59,14 @@ The assistant regression test passed with simulated Gemini and desktop actions. 
 If Atlas misses the wakeword, check the default microphone and Windows microphone permissions, then run `.\.venv\Scripts\python.exe -m test.wake_test` from the root. If speech works but Gemini fails, check the API key, model access, and quota. If an action fails, try it directly in Windows to check that your desktop session and device support it.
 
 See [design notes](docs/DESIGN.md) for the module layout.
+
+## Browser workspace
+
+Start `python -m src.web` from this checkout and open [Atlas](http://atlas.localhost:8010).
+The browser supports typed commands and one-shot microphone transcription.
+Review transcribed text before sending it. Allow desktop actions only for
+messages that should operate your computer. A provider failure appears in the
+conversation without stopping the interface. The existing voice-only entry
+point remains available.
+
+See [architecture and development](docs/ARCHITECTURE.md) for module boundaries.

@@ -45,3 +45,17 @@ def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch
     assert generate.call_count == 2
     assert len(assistant.chat_history) == 2
     assert assistant.load_history() == assistant.chat_history
+
+
+def test_browser_can_disable_desktop_actions(assistant):
+    action = Mock(return_value="Executed")
+    assistant.tool_functions["close_app"] = action
+    part = SimpleNamespace(
+        text="Closed.", function_call=SimpleNamespace(name="close_app", args={"query": "Notepad"}),
+    )
+    assistant.client.models.generate_content.return_value = SimpleNamespace(
+        candidates=[SimpleNamespace(content=SimpleNamespace(parts=[part]))],
+    )
+    reply = assistant.talk_to_atlas("Close Notepad", allow_actions=False)
+    action.assert_not_called()
+    assert reply == "Enable desktop actions to run this command."
