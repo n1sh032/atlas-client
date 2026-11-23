@@ -129,7 +129,7 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
               "keep it short, 1-3 sentences, this basically gets read out loud")
 
 
-def talk_to_atlas(user_text):
+def talk_to_atlas(user_text, allow_actions=True):
     user_message = {"role": "user", "parts": [{"text": user_text}]}
 
     for attempt in range(3):
@@ -156,7 +156,9 @@ def talk_to_atlas(user_text):
         if call:
             fn = call.name
             args = dict(call.args) if call.args else {}
-            if fn in tool_functions:
+            if not allow_actions:
+                did_stuff.append(f"{fn} -> Enable desktop actions to run this command.")
+            elif fn in tool_functions:
                 try:
                     r = tool_functions[fn](**args)
                 except Exception as e:
