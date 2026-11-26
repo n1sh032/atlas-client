@@ -34,3 +34,9 @@ def listen_for_wakeword():
     while True:
         chunk = np.frombuffer(_wake_stream.read(1280), dtype=np.int16)
         pred = oww_model.predict(chunk)
+        best = max(pred.values(), default=0)
+
+        if best > config.wake_threshold:
+            hits += 1
+            if hits >= config.wake_hits_needed:
+                return
