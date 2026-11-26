@@ -22,3 +22,6 @@ def draft_document(topic):
         contents=f"write the following, just the content, no preamble: {topic}"
     )
     content = res.text.strip()
+
+    drafts_folder = os.path.join(os.path.expanduser("~"), "Documents", config.drafts_folder)
+    os.makedirs(drafts_folder, exist_ok=True)
