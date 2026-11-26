@@ -13,3 +13,6 @@ from openwakeword.model import Model
 import config
 
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
+recognizer = sr.Recognizer()
+recognizer.pause_threshold = config.mic_pause_threshold
+
