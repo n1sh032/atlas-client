@@ -130,6 +130,9 @@ def send_discord_message(message):
     time.sleep(1)  # give windows time to actually bring it to front
 
     pyautogui.typewrite(message, interval=0.02)
+    pyautogui.press("enter")
+    return f"sent to discord: {message}"
+
 
 
 def close_app(query):
