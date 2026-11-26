@@ -88,6 +88,12 @@ def find_and_open_app(query):
         os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs"),
     ]
 
+    shortcuts = []
+    for d in start_menu_dirs:
+        for root, dirs, files in os.walk(d):
+            for f in files:
+                if f.lower().endswith(".lnk"):
+                    name = f[:-4]
 
 
 def get_calendar_service():
