@@ -126,8 +126,7 @@ def find_and_open_file(query):
         return "no files to search"
 
     names = [n for n, p in files]
-    match = difflib.get_close_matches(query, names, n=1, cutoff=0.3)
-
+    match = difflib.get_close_matches(query, names, n=1, cutoff=0.45)
     if not match:
         return f"couldnt find anything matching '{query}'"
 
