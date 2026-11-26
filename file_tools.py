@@ -82,3 +82,9 @@ def track_recent(filepath):
     if len(recent_files) > 5:
         recent_files.pop(0)
 
+
+def open_last_file():
+    if not recent_files:
+        return "i dont have a record of a recently opened file"
+    last = recent_files[-1]
+    os.startfile(last)
