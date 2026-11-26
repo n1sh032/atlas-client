@@ -85,9 +85,6 @@ def main():
 
         if cmd in exact:
             action = exact[cmd]
-
-        elif cmd == "open cmd":
-            subprocess.Popen(["cmd.exe"])
             print("Atlas: opening command prompt")
 
         else:
