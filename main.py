@@ -11,6 +11,8 @@ import ctypes
 import webbrowser
 from urllib.parse import quote_plus
 import psutil
+import pygetwindow as gw
+import pyautogui
 import pyaudiowpatch as pyaudio
 sys.modules["pyaudio"] = pyaudio
 import speech_recognition as sr
