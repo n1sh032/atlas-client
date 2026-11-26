@@ -85,8 +85,6 @@ def main():
 
         if cmd in exact:
             action = exact[cmd]
-            print("Atlas: opening command prompt")
-
         else:
             action = ask_gemini(cmd)
 
