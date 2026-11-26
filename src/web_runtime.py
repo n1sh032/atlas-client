@@ -118,3 +118,11 @@ def serve(application, assets, name, port):
         f"127.0.0.1:{server.server_port}",
     }
     server.daemon_threads = True
+    print(f"Open http://{name}.localhost:{server.server_port}", flush=True)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+        worker.shutdown(wait=True, cancel_futures=True)
