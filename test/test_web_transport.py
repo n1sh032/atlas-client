@@ -58,3 +58,4 @@ serve(App(), Path("web"), "test", 0)
         assert state["result"] == {"message": "checked"}
     finally:
         process.terminate()
+        process.communicate(timeout=5)
