@@ -428,6 +428,9 @@ tool_functions = {
     "schedule_meeting": lambda when_text, title: schedule_meeting(when_text, title),
     "google_search": lambda query: google_search(query),
     "set_volume": lambda level: set_volume(level),
+    "set_brightness": lambda level: set_brightness(level),
+    "mute_toggle": lambda: mute_toggle(),
+    "lock_screen": lambda: lock_screen(),
 }
 
 
