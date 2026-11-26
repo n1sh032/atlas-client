@@ -34,3 +34,6 @@ def draft_document(topic):
         doc.add_paragraph(line)
     doc.save(filepath)
 
+    os.startfile(filepath)
+
+    # importing here instead of top of file to dodge a circular import
