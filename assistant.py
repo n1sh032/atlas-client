@@ -142,3 +142,9 @@ def talk_to_atlas(user_text):
                     r = tool_functions[fn](**args)
                 except Exception as e:
                     r = f"that broke: {e}"
+                did_stuff.append(f"{fn} -> {r}")
+
+        if getattr(p, "text", None):
+            reply += p.text
+
+    chat_history.append({"role": "model", "parts": [{"text": reply or " ; ".join(did_stuff) or "ok"}]})
