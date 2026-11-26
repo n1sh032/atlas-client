@@ -326,6 +326,12 @@ def play_pause():
 # per-app keyboard shortcuts, since not everything has a media key equivalent.
 # add more here as you think of ones you actually use
 app_shortcuts = {
+    "vscode": {
+        "save": ["ctrl", "s"],
+        "new file": ["ctrl", "n"],
+        "close tab": ["ctrl", "w"],
+        "terminal": ["ctrl", "`"],
+    },
 }
 
 exact = {
