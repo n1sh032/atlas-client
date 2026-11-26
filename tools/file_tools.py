@@ -177,9 +177,9 @@ def close_app(query):
     }
     windows = []
 
-    for orig, c in zip(running, clean):
-        if query.lower() in c.lower():
-            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
+    def find_window(hwnd, _):
+        if win32gui.IsWindowVisible(hwnd):
+            _, pid = win32process.GetWindowThreadProcessId(hwnd)
             return f"closed {orig}"
 
     match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
