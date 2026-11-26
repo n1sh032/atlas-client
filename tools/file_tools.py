@@ -19,3 +19,6 @@ def open_notepad():
 def type_in_notepad(text):
     subprocess.Popen(["notepad.exe"])
     time.sleep(1)
+    windows = [w for w in gw.getAllTitles() if "notepad" in w.lower()]
+    if not windows:
+        return "couldnt focus notepad, didnt type anything"
