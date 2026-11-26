@@ -178,3 +178,6 @@ def close_app(query):
             return f"closed {orig}"
 
     match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
+    if not match:
+        return f"couldnt find a running app matching '{query}'"
+
