@@ -52,6 +52,9 @@ def type_in_notepad(text):
         win.restore()
     win.activate()
     time.sleep(1)
+    active = gw.getActiveWindow()
+    if not active or "notepad" not in active.title.lower():
+        return "couldnt focus notepad, didnt type anything"
 
 def open_downloads():
     dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
