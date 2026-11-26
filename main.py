@@ -319,6 +319,9 @@ def listen_for_wakeword():
 
     print("listening for 'hey jarvis'...")
 
+    for _ in range(5):
+        stream.read(1280)
+
     while True:
         chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
         prediction = oww_model.predict(chunk)
