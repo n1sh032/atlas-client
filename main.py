@@ -51,6 +51,9 @@ def find_and_open_file(query):
             continue
         for name in os.listdir(f):
             full = os.path.join(f, name)
+            if os.path.isfile(full):
+                files.append((name, full))
+
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
