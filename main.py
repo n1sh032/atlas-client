@@ -123,7 +123,9 @@ def main():
         else:
             action = ask_gemini(cmd)
 
-        if action in actions:
+        if action.startswith("open_file:"):
+            query = action.split(":", 1)[1].strip()
+            print("Atlas:", find_and_open_file(query))
             print("Atlas:", actions[action]())
         else:
             print("Atlas: idk that command yet")
