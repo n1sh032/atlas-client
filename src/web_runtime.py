@@ -73,3 +73,9 @@ def serve(application, assets, name, port):
             self.end_headers()
             self.wfile.write(body)
 
+        def do_POST(self):
+            self.connection.settimeout(10)
+            if not self.valid_host() or self.headers.get(
+                "Origin"
+            ) != "http://" + self.headers.get("Host", ""):
+                self.reply(403, {"error": "Requests must come from this app."})
