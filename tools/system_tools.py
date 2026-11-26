@@ -112,3 +112,6 @@ def send_app_shortcut(app_name, action):
     win = gw.getWindowsWithTitle(windows[0])[0]
     if win.isMinimized:
         win.restore()
+    win.activate()
+    time.sleep(0.5)
+
