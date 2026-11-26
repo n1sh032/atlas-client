@@ -112,3 +112,9 @@ def serve(application, assets, name, port):
             worker.submit(run, request["action"], payload)
             self.reply(202, {"accepted": True})
 
+    server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+    allowed = {
+        f"{name}.localhost:{server.server_port}",
+        f"127.0.0.1:{server.server_port}",
+    }
+    server.daemon_threads = True
