@@ -28,3 +28,6 @@ def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch
     class FakeAPIError(Exception):
         code = 503
 
+    monkeypatch.setattr(assistant, "APIError", FakeAPIError)
+    monkeypatch.setattr(assistant.time, "sleep", Mock())
+    action = Mock(return_value="No visible window found.")
