@@ -244,7 +244,6 @@ def lock_screen():
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
-    "chrome": open_chrome,
     "cmd": open_cmd,
     "spotify": open_spotify,
     "vscode": open_vscode,
