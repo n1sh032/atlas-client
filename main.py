@@ -9,7 +9,6 @@ def main():
         if cmd == "exit":
             print("shutting down")
             break
-        print(f"Jarvis: I heard '{user_input}'")
 
 
 if __name__ == "__main__":
