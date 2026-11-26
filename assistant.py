@@ -118,3 +118,6 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
               "like 'time it' or 'do that again' or 'what did i say about x'. "
               "keep it short, 1-3 sentences, this basically gets read out loud")
 
+
+def talk_to_atlas(user_text):
+    chat_history.append({"role": "user", "parts": [{"text": user_text}]})
