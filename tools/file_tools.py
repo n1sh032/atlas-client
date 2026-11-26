@@ -76,3 +76,9 @@ def open_explorer():
 # only knows about stuff opened through atlas, not files you opened yourself
 recent_files = []
 
+def track_recent(filepath):
+    recent_files.append(filepath)
+    if len(recent_files) > 5:
+        recent_files.pop(0)
+
+
