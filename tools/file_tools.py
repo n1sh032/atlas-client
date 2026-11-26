@@ -118,3 +118,9 @@ def find_and_open_file(query):
             os.startfile(p)
             track_recent(p)
             return f"opening {n}"
+
+
+def find_and_open_app(query):
+    query = query.lower()
+    if "spotify" in query:
+        os.startfile("spotify:")
