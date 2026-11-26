@@ -128,7 +128,7 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
 
 
 def talk_to_atlas(user_text):
-    chat_history.append({"role": "user", "parts": [{"text": user_text}]})
+    user_message = {"role": "user", "parts": [{"text": user_text}]}
 
     res = client.models.generate_content(
         model=config.gemini_model,
