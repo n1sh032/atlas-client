@@ -115,3 +115,5 @@ def send_app_shortcut(app_name, action):
     win.activate()
     time.sleep(0.5)
 
+    pyautogui.hotkey(*app_shortcuts[app_name][action])
+    return f"sent {action} in {app_name}"
