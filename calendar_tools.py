@@ -10,3 +10,6 @@ from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 
 import config
+
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
+
