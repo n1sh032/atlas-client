@@ -7,6 +7,7 @@ def main():
         cmd = input("You: ").strip().lower()
 
         if cmd == "exit":
+            print("shutting down")
             break
         print(f"Jarvis: I heard '{user_input}'")
 
