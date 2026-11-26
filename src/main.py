@@ -7,3 +7,12 @@ from src.voice import listen_for_wakeword, listen_for_command, speak
 from src.assistant import talk_to_atlas_safe, save_history
 
 
+def main():
+    print("atlas is online (voice mode)")
+    while True:
+        try:
+            listen_for_wakeword()
+            cmd = listen_for_command()
+        except KeyboardInterrupt:
+            print("shutting down")
+            save_history()
