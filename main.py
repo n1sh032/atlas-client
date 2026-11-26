@@ -98,6 +98,9 @@ def schedule_meeting(when_text, title):
     service = get_calendar_service()
 
     start = dateparser.parse(when_text)
+    if not start:
+        # couldnt figure out the time, just default to 1hr from now
+        start = datetime.now() + timedelta(hours=1)
 
 
 actions = {
