@@ -327,7 +327,7 @@ def listen_for_wakeword():
         prediction = oww_model.predict(chunk)
 
         for wakeword, score in prediction.items():
-            if score > 0.5:
+            if score > 0.7:
                 stream.stop_stream()
                 stream.close()
                 audio.terminate()
