@@ -253,7 +253,6 @@ actions = {
 exact = {
     "open notepad": "notepad",
     "open downloads": "downloads",
-    "open chrome": "chrome",
     "open cmd": "cmd",
     "open spotify": "spotify",
     "open vscode": "vscode",
