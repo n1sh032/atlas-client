@@ -386,6 +386,9 @@ def main():
         elif action.startswith("search:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", google_search(query))
+        elif action.startswith("answer:"):
+            query = action.split(":", 1)[1].strip()
+            print("Atlas:", ask_gemini_general(query))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
