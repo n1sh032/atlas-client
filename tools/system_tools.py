@@ -4,3 +4,6 @@
 import subprocess
 import time
 import ctypes
+import comtypes
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
