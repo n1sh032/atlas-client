@@ -130,6 +130,9 @@ def close_app(query):
     for original, clean in zip(running, running_clean):
         if query in clean.lower():
             subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
+            return f"closed {original}"
+
+    match = difflib.get_close_matches(query, [c.lower() for c in running_clean], n=1, cutoff=0.6)
 
 
 def get_calendar_service():
