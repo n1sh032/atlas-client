@@ -79,3 +79,6 @@ def serve(application, assets, name, port):
                 "Origin"
             ) != "http://" + self.headers.get("Host", ""):
                 self.reply(403, {"error": "Requests must come from this app."})
+                return
+            if self.path != "/api/actions":
+                self.reply(404, {"error": "Action endpoint not found"})
