@@ -287,6 +287,9 @@ if its schedule_meeting, reply like this instead:
 schedule_meeting: <when they said, eg "tomorrow at 3pm">|<short title for the meeting>
 
 if its a web search request, or asking about something real-time/current
+(weather, news, prices, scores, "whats the time in X" etc), reply like this:
+search: <search term>
+
 
 message: "{text}"
 """
