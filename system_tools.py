@@ -19,3 +19,6 @@ def get_volume_interface():
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     return cast(interface, POINTER(IAudioEndpointVolume))
 
+
+def set_volume(level):
+    level = max(0, min(100, int(level)))
