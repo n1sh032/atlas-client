@@ -158,7 +158,7 @@ def find_and_open_app(query):
                     shortcuts.append((f[:-4], os.path.join(root, f)))
 
     if not shortcuts:
-        return "couldnt find any installed apps"
+        return "cant find any installed apps"
 
     for n, p in shortcuts:
         if query in n.lower():
