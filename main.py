@@ -78,6 +78,12 @@ def find_and_open_file(query):
             return f"opening {n}"
 
 
+def find_and_open_app(query):
+    if "spotify" in query:
+        os.startfile("spotify:")
+        return "opening spotify"
+
+
 def get_calendar_service():
     creds = None
     if os.path.exists("token.pickle"):
