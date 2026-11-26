@@ -100,6 +100,9 @@ if user wants to open an app, reply with ONLY one word from this list:
 open_file
 unknown
 
+if its open_file, reply like this instead:
+open_file: <short search term for the file>
+
 message: "{text}"
 """
     res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
