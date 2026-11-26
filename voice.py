@@ -46,3 +46,6 @@ def listen_for_wakeword():
         audio.terminate()
 
 
+def listen_for_command():
+    with sr.Microphone() as source:
+        print("listening for command...")
