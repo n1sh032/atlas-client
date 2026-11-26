@@ -392,6 +392,9 @@ def main():
         elif action.startswith("set_volume:"):
             level = int(action.split(":", 1)[1].strip())
             print("Atlas:", set_volume(level))
+        elif action.startswith("set_brightness:"):
+            level = int(action.split(":", 1)[1].strip())
+            print("Atlas:", set_brightness(level))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
