@@ -162,6 +162,9 @@ message: "{text}"
     return res.text.strip().lower()
 
 
+oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
+recognizer = sr.Recognizer()
+
 def main():
     print("atlas is online. type exit to quit")
     while True:
