@@ -136,6 +136,9 @@ def close_app(query):
     if not match:
         return f"couldnt find a running app matching '{query}'"
 
+    for original, clean in zip(running, running_clean):
+        if clean.lower() == match[0]:
+            subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
 
 
 def get_calendar_service():
