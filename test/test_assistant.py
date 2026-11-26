@@ -57,3 +57,5 @@ def test_browser_can_disable_desktop_actions(assistant):
         candidates=[SimpleNamespace(content=SimpleNamespace(parts=[part]))],
     )
     reply = assistant.talk_to_atlas("Close Notepad", allow_actions=False)
+    action.assert_not_called()
+    assert reply == "Enable desktop actions to run this command."
