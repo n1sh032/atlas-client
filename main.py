@@ -228,6 +228,9 @@ def set_volume(level):
 
 def mute_toggle():
     vol = get_volume_interface()
+    current = vol.GetMute()
+    vol.SetMute(not current, None)
+    return "muted" if not current else "unmuted"
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
