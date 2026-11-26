@@ -16,6 +16,9 @@ def main():
             dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
             os.startfile(dl_path)
             print("Atlas: opening downloads folder")
+        elif cmd == "open chrome":
+            subprocess.Popen([r"C:\Program Files\Google\Chrome\Application\chrome.exe"])
+            print("Atlas: opening chrome")
 
         else:
             print("Atlas: not sure of that command yet")
