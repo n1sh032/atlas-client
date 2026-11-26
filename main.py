@@ -254,7 +254,7 @@ def schedule_meeting(when_text, title):
 
     start = dateparser.parse(when_text)
     if not start:
-        start = datetime.now() + timedelta(hours=1)
+        start = datetime.now() + timedelta(hours=1)  # couldnt parse it, just default
 
     end = start + timedelta(hours=1)
 
