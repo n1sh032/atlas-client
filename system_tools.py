@@ -61,3 +61,9 @@ def media_key(key_name):
     ctypes.windll.user32.keybd_event(vk, 0, 0, 0)  # key down
     ctypes.windll.user32.keybd_event(vk, 0, 2, 0)  # key up
     return f"sent {key_name}"
+
+
+def skip_song():
+    return media_key("next")
+
+
