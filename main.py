@@ -277,6 +277,9 @@ unknown
 if its open_file, reply like this instead:
 open_file: <short search term for the file>
 
+if its open_app, reply like this instead:
+open_app: <name of the app>
+
 if its schedule_meeting, reply like this instead:
 schedule_meeting: <when they said, keep it natural, eg "tomorrow at 3pm">|<short title for the meeting>
 
