@@ -14,5 +14,6 @@ def main():
             subprocess.Popen(["notepad.exe"])
             print("Atlas: opening notepad")
 
-if __name__ == "__main__":
-    main()
+        elif cmd == "open downloads":
+            dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
+            os.startfile(dl_path)
