@@ -10,3 +10,6 @@ import speech_recognition as sr
 import pyttsx3
 from openwakeword.model import Model
 
+from src import config
+
+oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
