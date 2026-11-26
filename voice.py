@@ -7,3 +7,6 @@ import pyaudiowpatch as pyaudio
 sys.modules["pyaudio"] = pyaudio  # speech_recognition hardcodes "import pyaudio"
                                    # so this tricks it into using the patched version
 import speech_recognition as sr
+import pyttsx3
+from openwakeword.model import Model
+
