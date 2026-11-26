@@ -52,3 +52,6 @@ class AtlasApplication:
             }
         return {"message": reply, "kind": "reply"}
 
+
+def main():
+    parser = argparse.ArgumentParser(description="Atlas desktop dashboard")
