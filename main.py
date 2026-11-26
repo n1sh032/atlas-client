@@ -517,6 +517,8 @@ def talk_to_atlas_safe(user_text):
             return talk_to_atlas(user_text)
         except Exception as e:
             print(f"atlas: gemini's being slow, retrying... ({e})")
+            time.sleep(10)
+    return "cant reach gemini rn, try again in a bit"
 
 
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
