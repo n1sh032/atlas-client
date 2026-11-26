@@ -187,8 +187,7 @@ def close_app(query):
     win32gui.EnumWindows(find_window, None)
     if not windows:
         return f"No visible window found for {name}. Use the exact app name."
-
-    for orig, c in zip(running, clean):
-        if c.lower() == match[0]:
-            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
-            return f"closed {orig}"
+    if len(windows) != 1:
+        return f"I found multiple windows for {name}. Close the intended window manually."
+    win32gui.PostMessage(windows[0], win32con.WM_CLOSE, 0, 0)
+    return f"Asked {name} to close. Check for any save prompt."
