@@ -88,3 +88,12 @@ def open_last_file():
     last = recent_files[-1]
     os.startfile(last)
     return f"reopening {os.path.basename(last)}"
+
+
+def find_and_open_file(query):
+    folders = [
+        os.path.join(os.path.expanduser("~"), "Desktop"),
+        os.path.join(os.path.expanduser("~"), "Documents"),
+        os.path.join(os.path.expanduser("~"), "Downloads"),
+    ]
+    files = []
