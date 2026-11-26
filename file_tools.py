@@ -67,3 +67,6 @@ def open_cmd():
     subprocess.Popen(["cmd.exe"])
     return "opening cmd"
 
+
+def open_explorer():
+    os.startfile(os.path.expanduser("~"))
