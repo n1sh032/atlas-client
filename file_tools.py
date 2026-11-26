@@ -133,3 +133,15 @@ def find_and_open_app(query):
         os.path.join(os.environ["ProgramData"], "Microsoft", "Windows", "Start Menu", "Programs"),
         os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs"),
     ]
+
+    shortcuts = []
+    for d in start_menu_dirs:
+        for root, dirs, files in os.walk(d):
+            for f in files:
+                if f.lower().endswith(".lnk"):
+                    shortcuts.append((f[:-4], os.path.join(root, f)))
+
+    if not shortcuts:
+        return "cant find any installed apps"
+
+    # substring check first, way more reliable than fuzzy for app names
