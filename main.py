@@ -39,6 +39,9 @@ HISTORY_FILE = "atlas_memory.json"
 def speak(text):
     print("Atlas:", text)
     engine = pyttsx3.init()
+    engine.setProperty("rate", 175)
+    engine.say(text)
+    engine.runAndWait()
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
