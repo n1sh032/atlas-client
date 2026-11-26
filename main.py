@@ -254,8 +254,6 @@ exact = {
     "open notepad": "notepad",
     "open downloads": "downloads",
     "open cmd": "cmd",
-    "open spotify": "spotify",
-    "open vscode": "vscode",
     "open explorer": "explorer",
 }
 
