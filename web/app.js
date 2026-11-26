@@ -59,6 +59,9 @@ function showInfo(app) {
     : "Add your Gemini key to .env";
 }
 function entry(who, text) {
+  document.querySelector(".empty-note")?.remove();
+  document.querySelector(".greeting").hidden = true;
+  document.querySelector(".suggestions").hidden = true;
   const row = document.createElement("div");
   row.className = "entry";
   const title = document.createElement("b");
@@ -84,4 +87,10 @@ $("command").addEventListener("submit", (event) => {
   send("chat", { message: text, allow_actions });
 });
 $("listen").addEventListener("click", () => send("listen"));
+document.querySelectorAll("[data-prompt]").forEach((button) => {
+  button.addEventListener("click", () => {
+    $("message").value = button.dataset.prompt;
+    $("message").focus();
+  });
+});
 poll();
