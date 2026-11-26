@@ -42,6 +42,7 @@ def speak(text):
     engine.setProperty("rate", 175)
     engine.say(text)
     engine.runAndWait()
+    engine.stop()
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
