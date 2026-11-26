@@ -10,3 +10,6 @@ from gemini_client import client
 import file_tools
 import system_tools
 import content_tools
+import calendar_tools
+
+
