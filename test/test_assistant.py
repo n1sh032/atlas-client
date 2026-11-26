@@ -19,3 +19,6 @@ def assistant(tmp_path, monkeypatch):
         setattr(tools, name, SimpleNamespace())
     monkeypatch.setitem(sys.modules, "tools", tools)
     spec = importlib.util.spec_from_file_location("assistant_under_test", "src/assistant.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
