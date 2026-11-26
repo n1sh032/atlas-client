@@ -434,6 +434,9 @@ tool_functions = {
     "draft_document": lambda topic: draft_document(topic),
     "type_in_notepad": lambda text: type_in_notepad(text),
     "type_in_discord": lambda text: type_in_discord(text),
+    "open_downloads": lambda: open_downloads(),
+    "open_explorer": lambda: open_explorer(),
+    "skip_song": lambda: skip_song(),
 }
 
 
