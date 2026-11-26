@@ -106,3 +106,6 @@ def send_app_shortcut(app_name, action):
     if action not in app_shortcuts[app_name]:
         return f"dont know a '{action}' shortcut for {app_name}"
 
+    windows = [w for w in gw.getAllTitles() if app_name in w.lower()]
+    if not windows:
+        return f"{app_name} isnt open"
