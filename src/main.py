@@ -16,3 +16,6 @@ def main():
         except KeyboardInterrupt:
             print("shutting down")
             save_history()
+            break
+        except Exception as e:
+            print(f"atlas: listening broke ({e}), trying again")
