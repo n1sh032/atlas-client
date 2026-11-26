@@ -104,6 +104,12 @@ def schedule_meeting(when_text, title):
 
     end = start + timedelta(hours=1)
 
+    event = {
+        "summary": title,
+        "start": {"dateTime": start.isoformat(), "timeZone": "Asia/Singapore"},
+        "end": {"dateTime": end.isoformat(), "timeZone": "Asia/Singapore"},
+    }
+
 
 
 actions = {
