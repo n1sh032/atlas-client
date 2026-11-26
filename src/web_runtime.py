@@ -103,3 +103,6 @@ def serve(application, assets, name, port):
             with lock:
                 if state["busy"]:
                     accepted = False
+                else:
+                    state.update(busy=True, error=None)
+                    accepted = True
