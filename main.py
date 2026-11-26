@@ -607,7 +607,7 @@ def main():
             break
 
         reply = talk_to_atlas_safe(cmd)
-        print("Atlas:", reply)
+        speak(reply)
 
 
 if __name__ == "__main__":
