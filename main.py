@@ -294,6 +294,9 @@ if its a general knowledge question you can just answer directly
 (not needing live info, not an app command), reply like this:
 answer: <the original question>
 
+if its setting volume, reply like this:
+set_volume: <number 0-100>
+
 message: "{text}"
 """
     res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
