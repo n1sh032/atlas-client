@@ -4,3 +4,6 @@ def main():
         user_input = input("You: ")
         if user_input.lower() == "exit":
             print("Shutting down.")
+            break
+        print(f"Jarvis: I heard '{user_input}'")
+
