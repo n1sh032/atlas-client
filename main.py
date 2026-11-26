@@ -287,6 +287,7 @@ def mute_toggle():
     return "muted" if not current else "unmuted"
 
 def set_brightness(level):
+    level = max(0, min(100, int(level)))
     sbc.set_brightness(level)
     return f"brightness set to {level}%"
 
