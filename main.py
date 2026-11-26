@@ -36,7 +36,9 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 HISTORY_FILE = "atlas_memory.json"
-
+def speak(text):
+    print("Atlas:", text)
+    engine = pyttsx3.init()
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
