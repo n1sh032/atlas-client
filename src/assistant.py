@@ -143,6 +143,8 @@ def talk_to_atlas(user_text):
                 raise
             time.sleep(2 ** attempt)
 
+    if not res.candidates or not res.candidates[0].content or not res.candidates[0].content.parts:
+        return "Gemini did not return a reply."
     parts = res.candidates[0].content.parts
     reply = ""
     did_stuff = []
