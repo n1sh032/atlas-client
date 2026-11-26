@@ -49,3 +49,12 @@ def serve(application, assets, name, port):
 
         def valid_host(self):
             return self.headers.get("Host") in allowed
+
+        def do_GET(self):
+            if not self.valid_host():
+                self.reply(403, {"error": "Use the address printed by the app."})
+                return
+            if self.path == "/api/state":
+                with lock:
+                    value = dict(state)
+                value["application"] = application.describe()
