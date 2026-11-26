@@ -160,3 +160,9 @@ def talk_to_atlas(user_text):
 
 def talk_to_atlas_safe(user_text):
     import time
+    for attempt in range(3):
+        try:
+            return talk_to_atlas(user_text)
+        except Exception as e:
+            print(f"atlas: gemini's being slow, retrying... ({e})")
+            time.sleep(10)
