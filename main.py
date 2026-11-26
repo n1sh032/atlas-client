@@ -255,6 +255,8 @@ exact = {
     "open downloads": "downloads",
     "open cmd": "cmd",
     "open explorer": "explorer",
+    "lock my screen": "lock_screen",
+    "mute": "mute",
 }
 
 
