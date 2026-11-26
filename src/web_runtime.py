@@ -46,3 +46,6 @@ def serve(application, assets, name, port):
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
             self.wfile.write(body)
+
+        def valid_host(self):
+            return self.headers.get("Host") in allowed
