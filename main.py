@@ -133,6 +133,9 @@ def close_app(query):
             return f"closed {original}"
 
     match = difflib.get_close_matches(query, [c.lower() for c in running_clean], n=1, cutoff=0.6)
+    if not match:
+        return f"couldnt find a running app matching '{query}'"
+
 
 
 def get_calendar_service():
