@@ -203,7 +203,7 @@ def listen_for_command():
 
 
 def main():
-    print("atlas is online. type exit to quit")
+    print("atlas is online (voice mode)")
     while True:
         cmd = input("You: ").strip().lower()
 
