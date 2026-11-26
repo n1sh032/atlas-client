@@ -70,5 +70,8 @@ def main():
             elif action == "cmd":
                 subprocess.Popen(["cmd.exe"])
                 print("Atlas: opening command prompt")
+            else:
+                print("Atlas: idk that command yet")
+
 
 main()
