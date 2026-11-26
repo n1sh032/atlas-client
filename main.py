@@ -85,9 +85,6 @@ def main():
 
         if cmd in exact:
             action = exact[cmd]
-
-        elif cmd == "open downloads":
-            dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
             os.startfile(dl_path)
             print("Atlas: opening downloads folder")
 
