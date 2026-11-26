@@ -130,11 +130,18 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
 def talk_to_atlas(user_text):
     user_message = {"role": "user", "parts": [{"text": user_text}]}
 
-    res = client.models.generate_content(
-        model=config.gemini_model,
-        contents=chat_history,
-        config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
-    )
+    for attempt in range(3):
+        try:
+            res = client.models.generate_content(
+                model=config.gemini_model,
+                contents=[*chat_history, user_message],
+                config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
+            )
+            break
+        except APIError as e:
+            if attempt == 2 or getattr(e, "code", None) not in {429, 500, 502, 503, 504}:
+                raise
+            time.sleep(2 ** attempt)
 
     parts = res.candidates[0].content.parts
     reply = ""
