@@ -40,3 +40,6 @@ def type_in_discord(text):
     if not windows:
         return "discord isnt open"
     win = gw.getWindowsWithTitle(windows[0])[0]
+    if win.isMinimized:
+        win.restore()
+    win.activate()
