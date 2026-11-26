@@ -65,6 +65,7 @@ def ask_gemini(text):
     prompt = f"""you are a command parser for atlas.
 reply with ONLY one word from this list, nothing else:
 
+{opts}
 unknown
 
 User message: "{user_text}"
