@@ -290,6 +290,9 @@ if its a web search request, or asking about something real-time/current
 (weather, news, prices, scores, "whats the time in X" etc), reply like this:
 search: <search term>
 
+if its a general knowledge question you can just answer directly
+(not needing live info, not an app command), reply like this:
+answer: <the original question>
 
 message: "{text}"
 """
