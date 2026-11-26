@@ -64,3 +64,6 @@ def serve(application, assets, name, port):
             if asset is None:
                 self.reply(404, {"error": "Page not found"})
                 return
+            filename, kind = asset
+            body = (assets / filename).read_bytes()
+            self.send_response(200)
