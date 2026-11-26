@@ -16,3 +16,6 @@ mic_phrase_limit = 20       # max length of one command
 
 # fuzzy match cutoffs, tuned these by just testing till they stopped being dumb
 file_match_cutoff = 0.45
+app_open_cutoff = 0.5
+app_close_cutoff = 0.6   # higher bc closing the wrong app is way more annoying than opening one
+
