@@ -55,3 +55,15 @@ def listen_for_command():
         except sr.WaitTimeoutError:
             print("atlas: didnt hear anything, going back to sleep")
             return None
+
+    try:
+        text = recognizer.recognize_google(audio)
+        print(f"heard: {text}")
+        return text
+    except sr.UnknownValueError:
+        print("atlas: didnt catch that")
+        return None
+    except sr.WaitTimeoutError:
+        print("atlas: didnt hear anything, going back to sleep")
+        return None
+
