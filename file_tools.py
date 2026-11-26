@@ -172,3 +172,6 @@ def close_app(query):
 
     clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
 
+    for orig, c in zip(running, clean):
+        if query.lower() in c.lower():
+            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
