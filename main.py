@@ -55,6 +55,14 @@ def main():
             print("Atlas: opening command prompt")
 
         else:
-            print("Atlas: not sure of that command yet")
+            action = ask_gemini(cmd)
+
+            if action == "notepad":
+                subprocess.Popen(["notepad.exe"])
+                print("Atlas: opening notepad")
+            elif action == "downloads":
+                dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
+                os.startfile(dl_path)
+                print("Atlas: opening downloads folder")
 
 main()
