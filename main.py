@@ -177,7 +177,6 @@ def find_and_open_app(query):
             return f"opening {n}"
 
 
-
 def close_app(query):
     running = []
     for proc in psutil.process_iter(["pid", "name"]):
