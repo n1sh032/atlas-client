@@ -67,6 +67,9 @@ def type_in_discord(text):
         win.restore()
     win.activate()
     time.sleep(1)
+    active = gw.getActiveWindow()
+    if not active or "discord" not in active.title.lower():
+        return "couldnt focus discord, didnt type anything"
 
 def open_downloads():
     dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
