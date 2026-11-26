@@ -148,6 +148,9 @@ unknown
 if its open_file, reply like this instead:
 open_file: <short search term for the file>
 
+if its schedule_meeting, reply like this instead:
+schedule_meeting: <when they said, keep it natural, eg "tomorrow at 3pm">|<short title for the meeting>
+
 message: "{text}"
 """
     res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
