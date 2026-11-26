@@ -67,3 +67,6 @@ def skip_song():
     return media_key("next")
 
 
+def previous_song():
+    return media_key("prev")
+
