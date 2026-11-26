@@ -175,9 +175,6 @@ def find_and_open_app(query):
         if n == best:
             os.startfile(p)
             return f"opening {n}"
-    time.sleep(1)  # give windows time to actually bring it to front
-
-    pyautogui.typewrite(message, interval=0.02)
     pyautogui.press("enter")
     return f"sent to discord: {message}"
 
