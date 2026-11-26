@@ -296,6 +296,9 @@ unknown
 if its open_file, reply like this instead:
 open_file: <short search term for the file>
 
+if user wants to send a discord message, reply like this:
+discord: <the message to send>
+
 if its open_app, reply like this instead:
 open_app: <name of the app>
 
