@@ -110,6 +110,8 @@ def schedule_meeting(when_text, title):
         "end": {"dateTime": end.isoformat(), "timeZone": "Asia/Singapore"},
     }
 
+    created = service.events().insert(calendarId="primary", body=event).execute()
+    return f"scheduled '{title}' for {start.strftime('%d %b, %I:%M %p')}, check calendar: {created.get('htmlLink')}"
 
 
 actions = {
