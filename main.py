@@ -208,12 +208,6 @@ def google_search(query):
     return f"searching google for {query}"
 
 
-def ask_gemini_general(query):
-    res = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        contents=f"answer briefly and conversationally, 1-2 sentences max: {query}"
-    )
-    return res.text.strip()
 
 
 def draft_document(topic):
