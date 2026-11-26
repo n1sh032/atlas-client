@@ -25,3 +25,6 @@ def draft_document(topic):
 
     drafts_folder = os.path.join(os.path.expanduser("~"), "Documents", config.drafts_folder)
     os.makedirs(drafts_folder, exist_ok=True)
+
+    safe_name = "".join(c for c in topic if c.isalnum() or c == " ").strip()[:40]
+    filepath = os.path.join(drafts_folder, f"{safe_name}.docx")
