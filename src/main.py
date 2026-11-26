@@ -31,3 +31,6 @@ def main():
             break
 
         reply = talk_to_atlas_safe(cmd)
+        speak(reply)
+
+
