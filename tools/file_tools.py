@@ -163,3 +163,9 @@ def find_and_open_app(query):
 
 def close_app(query):
     running = []
+    for proc in psutil.process_iter(["pid", "name"]):
+        try:
+            running.append(proc.info["name"])
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
+
