@@ -103,3 +103,6 @@ def send_app_shortcut(app_name, action):
 
     if app_name not in app_shortcuts:
         return f"dont have shortcuts set up for {app_name}"
+    if action not in app_shortcuts[app_name]:
+        return f"dont know a '{action}' shortcut for {app_name}"
+
