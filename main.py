@@ -41,6 +41,9 @@ def open_notepad():
     subprocess.Popen(["notepad.exe"])
     return "opening notepad"
 
+def type_in_notepad(text):
+    subprocess.Popen(["notepad.exe"])
+
 def open_downloads():
     dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
     os.startfile(dl_path)
