@@ -300,6 +300,9 @@ set_volume: <number 0-100>
 if its setting brightness, reply like this:
 set_brightness: <number 0-100>
 
+if user wants something written/drafted (email, essay, message, letter, etc), reply like this:
+draft: <what they want written, keep their original request/topic intact>
+
 message: "{text}"
 """
     res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
