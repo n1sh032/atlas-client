@@ -338,6 +338,10 @@ app_shortcuts = {
         "reopen tab": ["ctrl", "shift", "t"],
         "refresh": ["f5"],
     },
+    "discord": {
+        "mute mic": ["ctrl", "shift", "m"],
+        "deafen": ["ctrl", "shift", "d"],
+    },
 }
 
 exact = {
