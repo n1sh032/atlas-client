@@ -31,3 +31,6 @@ def type_in_notepad(text):
     if not active or "notepad" not in active.title.lower():
         return "couldnt focus notepad, didnt type anything"
     pyautogui.write(text, interval=0.02)
+    return f"typed in notepad: {text}"
+
+
