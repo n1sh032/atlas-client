@@ -28,3 +28,9 @@ def draft_document(topic):
 
     safe_name = "".join(c for c in topic if c.isalnum() or c == " ").strip()[:40]
     filepath = os.path.join(drafts_folder, f"{safe_name}.docx")
+
+    doc = Document()
+    for line in content.split("\n"):
+        doc.add_paragraph(line)
+    doc.save(filepath)
+
