@@ -97,3 +97,6 @@ def find_and_open_file(query):
         os.path.join(os.path.expanduser("~"), "Downloads"),
     ]
     files = []
+    for f in folders:
+        if not os.path.exists(f):
+            continue
