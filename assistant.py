@@ -127,3 +127,6 @@ def talk_to_atlas(user_text):
         contents=chat_history,
         config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
     )
+
+    parts = res.candidates[0].content.parts
+    reply = ""
