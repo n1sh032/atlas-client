@@ -389,6 +389,9 @@ def main():
         elif action.startswith("answer:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", ask_gemini_general(query))
+        elif action.startswith("set_volume:"):
+            level = int(action.split(":", 1)[1].strip())
+            print("Atlas:", set_volume(level))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
