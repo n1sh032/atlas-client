@@ -49,3 +49,9 @@ def listen_for_wakeword():
 def listen_for_command():
     with sr.Microphone() as source:
         print("listening for command...")
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        try:
+            audio = recognizer.listen(source, timeout=config.mic_timeout, phrase_time_limit=config.mic_phrase_limit)
+        except sr.WaitTimeoutError:
+            print("atlas: didnt hear anything, going back to sleep")
+            return None
