@@ -10,3 +10,6 @@ wake_threshold = 0.9      # how confident it needs to be to count as a hit
 wake_hits_needed = 3      # needs this many hits in a row or it kept false triggering on noise
 
 # mic stuff
+mic_pause_threshold = 1.8   # bumped this up bc it kept cutting me off mid sentence
+mic_timeout = 5             # how long it waits for you to start talking
+mic_phrase_limit = 20       # max length of one command
