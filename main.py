@@ -302,7 +302,30 @@ def media_key(key_name):
     keys = {
         "play_pause": 0xB3,
         "next": 0xB0,
-    "mute": mute_toggle,
+        "prev": 0xB1,
+        "stop": 0xB2,
+    }
+    if key_name not in keys:
+        return "dont know that media action"
+
+    vk = keys[key_name]
+    ctypes.windll.user32.keybd_event(vk, 0, 0, 0)  # key down
+    ctypes.windll.user32.keybd_event(vk, 0, 2, 0)  # key up
+    return f"sent {key_name}"
+
+def skip_song():
+    return media_key("next")
+
+def previous_song():
+    return media_key("prev")
+
+def play_pause():
+    return media_key("play_pause")
+
+
+# per-app keyboard shortcuts, since not everything has a media key equivalent.
+# add more here as you think of ones you actually use
+app_shortcuts = {
 }
 
 exact = {
