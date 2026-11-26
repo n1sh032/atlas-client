@@ -184,9 +184,9 @@ def close_app(query):
                 windows.append(hwnd)
         return True
 
-    match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
-    if not match:
-        return f"couldnt find a running app matching '{query}'"
+    win32gui.EnumWindows(find_window, None)
+    if not windows:
+        return f"No visible window found for {name}. Use the exact app name."
 
     for orig, c in zip(running, clean):
         if c.lower() == match[0]:
