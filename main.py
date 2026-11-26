@@ -68,7 +68,7 @@ reply with ONLY one word from this list, nothing else:
 {opts}
 unknown
 
-User message: "{user_text}"
+message: "{text}"
 """
     response = client.models.generate_content(
         model="gemini-2.5-flash",
