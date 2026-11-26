@@ -46,6 +46,7 @@ def open_explorer():
     os.startfile(os.path.expanduser("~"))
     return "opening file explorer"
 
+
 def find_and_open_file(query):
     folders = [
         os.path.join(os.path.expanduser("~"), "Desktop"),
