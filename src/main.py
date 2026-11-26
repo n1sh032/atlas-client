@@ -34,3 +34,5 @@ def main():
         speak(reply)
 
 
+if __name__ == "__main__":
+    main()
