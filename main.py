@@ -201,6 +201,7 @@ def listen_for_command():
         print("atlas: no command heard, going back to sleep")
         return None
 
+
 def main():
     print("atlas is online. type exit to quit")
     while True:
