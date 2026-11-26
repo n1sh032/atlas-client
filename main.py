@@ -4,9 +4,9 @@ import subprocess
 def main():
     print("atlas is online. type exit to quit")
     while True:
-        user_input = input("You: ")
-        if user_input.lower() == "exit":
-            print("Shutting down.")
+        cmd = input("You: ").strip().lower()
+
+        if cmd == "exit":
             break
         print(f"Jarvis: I heard '{user_input}'")
 
