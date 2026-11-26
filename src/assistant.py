@@ -88,3 +88,12 @@ tool_functions = {
 }
 
 
+def load_history():
+    if os.path.exists(config.memory_file):
+        try:
+            with open(config.memory_file, "r") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
