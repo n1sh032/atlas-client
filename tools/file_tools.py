@@ -85,3 +85,6 @@ def track_recent(filepath):
 def open_last_file():
     if not recent_files:
         return "i dont have a record of a recently opened file"
+    last = recent_files[-1]
+    os.startfile(last)
+    return f"reopening {os.path.basename(last)}"
