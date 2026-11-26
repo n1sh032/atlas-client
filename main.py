@@ -174,6 +174,12 @@ def listen_for_wakeword():
 
     while True:
         chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
+        prediction = oww_model.predict(chunk)
+
+        for wakeword, score in prediction.items():
+            if score > 0.5:
+                stream.stop_stream()
+                stream.close()
 def main():
     print("atlas is online. type exit to quit")
     while True:
