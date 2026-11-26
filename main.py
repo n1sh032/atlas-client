@@ -127,6 +127,9 @@ def close_app(query):
 
     running_clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
 
+    for original, clean in zip(running, running_clean):
+        if query in clean.lower():
+            subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
 
 
 def get_calendar_service():
