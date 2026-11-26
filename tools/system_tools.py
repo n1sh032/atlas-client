@@ -46,3 +46,15 @@ def lock_screen():
 
 
 # windows media key codes, works for spotify/yt/vlc/etc, anything that
+# hooks into the system media session
+def media_key(key_name):
+    keys = {
+        "play_pause": 0xB3,
+        "next": 0xB0,
+        "prev": 0xB1,
+        "stop": 0xB2,
+    }
+    if key_name not in keys:
+        return "dont know that media action"
+
+    vk = keys[key_name]
