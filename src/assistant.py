@@ -7,3 +7,6 @@ from src import config
 from src.gemini_client import client
 
 from tools import file_tools
+from tools import system_tools
+from tools import content_tools
+from tools import calendar_tools
