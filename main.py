@@ -376,6 +376,9 @@ def main():
         elif action.startswith("open_app:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", find_and_open_app(query))
+        elif action.startswith("close_app:"):
+            query = action.split(":", 1)[1].strip()
+            print("Atlas:", close_app(query))
         elif action.startswith("schedule_meeting:"):
             details = action.split(":", 1)[1].strip()
             when_text, title = details.split("|", 1)
