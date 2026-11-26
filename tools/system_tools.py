@@ -97,3 +97,6 @@ app_shortcuts = {
 }
 
 
+def send_app_shortcut(app_name, action):
+    app_name = app_name.lower()
+    action = action.lower()
