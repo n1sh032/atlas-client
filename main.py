@@ -156,6 +156,15 @@ def ask_gemini_general(query):
     return res.text.strip()
 
 
+def draft_document(topic):
+    res = client.models.generate_content(
+        model="gemini-3.1-flash-lite",
+        contents=f"write the following, just the content, no preamble or explanation: {topic}"
+    )
+    content = res.text.strip()
+
+
+
 def get_calendar_service():
     creds = None
     if os.path.exists("token.pickle"):
