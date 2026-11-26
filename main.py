@@ -176,9 +176,6 @@ def find_and_open_app(query):
             os.startfile(p)
             return f"opening {n}"
 
-    if not windows:
-        return "discord doesnt seem to be open, opening it first"
-
     win = gw.getWindowsWithTitle(windows[0])[0]
     win.activate()
     time.sleep(1)  # give windows time to actually bring it to front
