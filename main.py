@@ -70,7 +70,6 @@ def find_and_open_file(query):
     if not match:
         return f"couldnt find anything matching '{query}'"
 
-    # find the full path that goes with the matched name
     for n, p in files:
         if n == match[0]:
             os.startfile(p)
