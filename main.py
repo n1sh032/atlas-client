@@ -163,6 +163,9 @@ def draft_document(topic):
     )
     content = res.text.strip()
 
+    drafts_folder = os.path.join(os.path.expanduser("~"), "Documents", "atlas drafts")
+    os.makedirs(drafts_folder, exist_ok=True)
+
 
 
 def get_calendar_service():
