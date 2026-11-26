@@ -603,4 +603,5 @@ def main():
         print("Atlas:", reply)
 
 
-main()
+if __name__ == "__main__":
+    main()
