@@ -22,3 +22,6 @@ _audio = pyaudio.PyAudio()
 _wake_stream = _audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
                             input=True, frames_per_buffer=1280)
 
+# throw away the first few reads once at startup, mic spikes when it first opens
+for _ in range(5):
+    _wake_stream.read(1280)
