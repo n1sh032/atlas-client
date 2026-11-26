@@ -332,6 +332,12 @@ app_shortcuts = {
         "close tab": ["ctrl", "w"],
         "terminal": ["ctrl", "`"],
     },
+    "chrome": {
+        "new tab": ["ctrl", "t"],
+        "close tab": ["ctrl", "w"],
+        "reopen tab": ["ctrl", "shift", "t"],
+        "refresh": ["f5"],
+    },
 }
 
 exact = {
