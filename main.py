@@ -535,16 +535,22 @@ def listen_for_wakeword():
     for _ in range(5):
         stream.read(1280)  # mic spikes on startup, throw these away
 
-    while True:
-        chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
-        prediction = oww_model.predict(chunk)
+    hits = 0
+    try:
+        while True:
+            chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
+            pred = oww_model.predict(chunk)
+            best = max(pred.values(), default=0)
 
-        for wakeword, score in prediction.items():
-            if score > 0.7:
-                stream.stop_stream()
-                stream.close()
-                audio.terminate()
-                return
+            if best > 0.9:
+                hits += 1
+                if hits >= 3:
+                    return
+            else:
+                hits = 0
+    finally:
+        stream.stop_stream()
+        stream.close()
 
 
 def listen_for_command():
