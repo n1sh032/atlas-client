@@ -3,54 +3,93 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Atlas</title>
+    <title>Atlas · Desktop companion</title>
     <link rel="stylesheet" href="/style.css" />
     <script src="/app.js" defer></script>
   </head>
   <body>
-    <main>
+    <aside class="rail">
+      <a class="brand" href="#conversation"
+        ><span class="mark" aria-hidden="true">a</span>atlas<span
+          class="brand-dot"
+          >.</span
+        ></a
+      >
+      <p class="rail-label">YOUR WORKSPACE</p>
+      <nav aria-label="Workspace">
+        <a class="active" href="#conversation">Conversation</a
+        ><a href="#composer">Write a command</a
+        ><a href="#permissions">Desktop access</a>
+      </nav>
+      <div class="rail-bottom">
+        <span class="avatar">GN</span>
+        <div>
+          <strong>Personal workspace</strong><small>On this computer</small>
+        </div>
+      </div>
+    </aside>
+    <main id="conversation">
       <header>
-        <div class="logo">Atlas</div>
-        <p id="connection">Connecting…</p>
+        <span class="breadcrumb">Workspace <span>/</span> Conversation</span
+        ><span class="connection" id="connection">Connecting…</span>
       </header>
-      <h1>Your desktop, in conversation.</h1>
-      <p class="lead">
-        Ask a question or give Atlas a specific task. Review the reply here and
-        keep control of desktop actions.
-      </p>
-      <p id="status" role="status">Connecting…</p>
-      <div class="layout">
-        <section class="panel" aria-label="Workspace">
+      <div class="conversation-shell">
+        <div class="greeting">
+          <div class="orb" aria-hidden="true"><span></span></div>
+          <p class="eyebrow">YOUR DESKTOP COMPANION</p>
+          <h1>A little help.<br />A lot more headspace.</h1>
+          <p>
+            Ideas, answers, and the next thing on your list.<br />What would you
+            like to do?
+          </p>
+        </div>
+        <div class="suggestions" aria-label="Try a prompt">
+          <button data-prompt="Help me plan the rest of my day.">
+            <span>Make a plan</span
+            ><small>Find a good place to start</small></button
+          ><button
+            data-prompt="Explain a technical topic to me in simple terms."
+          >
+            <span>Think it through</span
+            ><small>Make something clearer</small></button
+          ><button data-prompt="Open Notepad.">
+            <span>Get something done</span
+            ><small>Give your desktop a task</small>
+          </button>
+        </div>
+        <div id="output" role="log" aria-live="polite">
+          <div class="empty-note">
+            Your conversation stays here while this page is open.
+          </div>
+        </div>
+        <div id="composer">
           <form id="command">
-            <label for="message">Message</label
+            <label class="sr-only" for="message">Message Atlas</label
             ><textarea
               id="message"
               maxlength="4000"
-              placeholder="Open Notepad, or help me think through an idea"
+              placeholder="Ask Atlas anything, or give it a task…"
               required
             ></textarea>
-            <label class="inline"
-              ><input id="allow" type="checkbox" /> Allow desktop actions for
-              this message</label
-            >
-            <p class="hint">
-              Actions can type into apps, change settings and create calendar
-              events. Keep the intended application in view.
-            </p>
-            <div class="actions">
-              <button data-action type="submit">Send message</button
-              ><button data-action type="button" id="listen" class="secondary">
-                Use microphone
+            <div class="composer-bottom">
+              <button type="button" id="listen" data-action class="mic">
+                Use microphone</button
+              ><button data-action type="submit" class="send">
+                Send message
               </button>
             </div>
           </form>
-        </section>
-        <section class="panel">
-          <h2>Conversation</h2>
-          <div id="output" role="log" aria-live="polite">
-            <p class="hint">Your replies appear here.</p>
+          <div class="permission" id="permissions">
+            <label
+              ><input id="allow" type="checkbox" /><span
+                >Allow desktop actions for this message</span
+              ></label
+            ><span class="permission-help"
+              >Typing, apps, settings & calendar</span
+            >
           </div>
-        </section>
+          <p id="status" role="status">Connecting…</p>
+        </div>
       </div>
     </main>
   </body>
