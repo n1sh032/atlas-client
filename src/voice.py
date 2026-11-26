@@ -76,3 +76,5 @@ def speak(text):
         voices = engine.getProperty("voices")
         engine.setProperty("voice", voices[config.tts_voice_index].id)
     engine.say(text)
+    engine.runAndWait()
+    engine.stop()
