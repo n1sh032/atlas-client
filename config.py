@@ -22,3 +22,6 @@ app_close_cutoff = 0.6   # higher bc closing the wrong app is way more annoying 
 # tts
 tts_rate = 175
 tts_voice_index = None   # set this after checking voices, see readme
+
+chat_history_cap = 60
+memory_file = "atlas_memory.json"
