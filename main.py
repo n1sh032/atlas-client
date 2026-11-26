@@ -383,6 +383,9 @@ def main():
             details = action.split(":", 1)[1].strip()
             when_text, title = details.split("|", 1)
             print("Atlas:", schedule_meeting(when_text.strip(), title.strip()))
+        elif action.startswith("search:"):
+            query = action.split(":", 1)[1].strip()
+            print("Atlas:", google_search(query))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
