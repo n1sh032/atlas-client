@@ -7,3 +7,6 @@ timezone = "Asia/Singapore"
 
 # wake word stuff
 wake_threshold = 0.9      # how confident it needs to be to count as a hit
+wake_hits_needed = 3      # needs this many hits in a row or it kept false triggering on noise
+
+# mic stuff
