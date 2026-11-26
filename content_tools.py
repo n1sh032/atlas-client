@@ -7,3 +7,6 @@ from urllib.parse import quote_plus
 from docx import Document
 
 import config
+from gemini_client import client
+
+
