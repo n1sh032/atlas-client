@@ -437,6 +437,9 @@ tool_functions = {
     "open_downloads": lambda: open_downloads(),
     "open_explorer": lambda: open_explorer(),
     "skip_song": lambda: skip_song(),
+    "previous_song": lambda: previous_song(),
+    "play_pause": lambda: play_pause(),
+    "send_app_shortcut": lambda app_name, action: send_app_shortcut(app_name, action),
 }
 
 
