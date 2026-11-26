@@ -267,6 +267,8 @@ if user wants one of these specific things, reply with ONLY one word from this l
 
 {opts}
 open_file
+open_app
+close_app
 schedule_meeting
 unknown
 
