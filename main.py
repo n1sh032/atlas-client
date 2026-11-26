@@ -38,7 +38,6 @@ def open_downloads():
     os.startfile(dl_path)
     return "opening downloads folder"
 
-
 def open_cmd():
     subprocess.Popen(["cmd.exe"])
     return "opening cmd"
