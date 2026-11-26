@@ -88,21 +88,10 @@ def main():
         else:
             action = ask_gemini(cmd)
 
-            if action == "notepad":
-                subprocess.Popen(["notepad.exe"])
-                print("Atlas: opening notepad")
-            elif action == "downloads":
-                dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
-                os.startfile(dl_path)
-                print("Atlas: opening downloads folder")
-            elif action == "chrome":
-                subprocess.Popen([r"C:\Program Files\Google\Chrome\Application\chrome.exe"])
-                print("Atlas: opening chrome")
-            elif action == "cmd":
-                subprocess.Popen(["cmd.exe"])
-                print("Atlas: opening command prompt")
-            else:
-                print("Atlas: idk that command yet")
+        if action in actions:
+            print("Atlas:", actions[action]())
+        else:
+            print("Atlas: idk that command yet")
 
 
 main()
