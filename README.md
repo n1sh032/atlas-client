@@ -35,7 +35,7 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 ### Gemini API key
 
-Create a file named `.env` beside `main.py`:
+Create a file named `.env` in the repository root:
 
 ```text
 GEMINI_API_KEY=your_gemini_api_key
@@ -48,7 +48,7 @@ Keep this file private. Do not commit API keys to Git.
 1. Create or select a project in Google Cloud.
 2. Enable the Google Calendar API.
 3. Create an OAuth desktop-app client and download its JSON file.
-4. Save it as `credentials.json` beside `main.py`.
+4. Save it as `credentials.json` in the repository root.
 5. On the first calendar command, complete the browser authorization flow.
 
 Atlas stores the resulting authorization token in `token.pickle`. Keep both credential files private.
@@ -56,7 +56,7 @@ Atlas stores the resulting authorization token in `token.pickle`. Keep both cred
 ## Run Atlas
 
 ```powershell
-python main.py
+python -m src.main
 ```
 
 The program waits quietly for the wakeword. After detecting **Hey Jarvis**, it listens for one command for up to 20 seconds. Say `exit` after the wakeword to stop the program.
@@ -64,7 +64,7 @@ The program waits quietly for the wakeword. After detecting **Hey Jarvis**, it l
 To test wakeword detection without running the assistant actions:
 
 ```powershell
-python wake_test.py
+python -m test.wake_test
 ```
 
 ## Example commands
@@ -115,7 +115,7 @@ Drafts are saved as `.docx` files in `Documents\atlas drafts`.
 - “Open a new tab in Chrome”
 - “Mute my mic in Discord”
 
-Shortcuts are limited to the applications and actions configured in `main.py`.
+Shortcuts are limited to the applications and actions configured in the tools.
 
 ## How it works
 
@@ -125,7 +125,7 @@ Shortcuts are limited to the applications and actions configured in `main.py`.
 4. Atlas runs the Windows action and reads the result aloud with `pyttsx3`.
 5. Conversation history is saved locally in `atlas_memory.json` and reused for follow-up questions.
 
-Transient Gemini failures are retried three times. Listening and action errors are reported and the assistant returns to its wakeword loop instead of exiting.
+Atlas makes up to three attempts for transient Gemini failures. Listening and action errors are reported and the assistant returns to its wakeword loop.
 
 ## Troubleshooting
 
@@ -156,8 +156,10 @@ Atlas retries temporary API failures and then returns to listening. Retries cann
 
 | File | Purpose |
 | --- | --- |
-| `main.py` | Assistant, voice loop, Gemini tools, and Windows actions |
-| `wake_test.py` | Standalone wakeword detector test |
+| `src/main.py` | Voice loop and entry point |
+| `src/assistant.py` | Gemini tool dispatch and conversation history |
+| `tools/` | Windows, calendar, file and document actions |
+| `test/wake_test.py` | Standalone wakeword detector test |
 | `.env` | Local Gemini API key; keep private |
 | `credentials.json` | Google Calendar OAuth client; keep private |
 | `token.pickle` | Cached Google Calendar authorization; keep private |
