@@ -216,6 +216,9 @@ def schedule_meeting(when_text, title):
     return f"scheduled '{title}' for {start.strftime('%d %b, %I:%M %p')}, check calendar: {created.get('htmlLink')}"
 
 
+def get_volume_interface():
+    devices = AudioUtilities.GetSpeakers()
+    interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
