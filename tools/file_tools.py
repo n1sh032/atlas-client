@@ -34,3 +34,12 @@ def type_in_notepad(text):
     return f"typed in notepad: {text}"
 
 
+def type_in_discord(text):
+    windows = [w for w in gw.getAllTitles() if "discord" in w.lower()]
+    if not windows:
+        return "discord isnt open"
+    win = gw.getWindowsWithTitle(windows[0])[0]
+    if win.isMinimized:
+        win.restore()
+    win.activate()
+    time.sleep(1)
