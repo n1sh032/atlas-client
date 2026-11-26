@@ -174,6 +174,9 @@ def main():
         if action.startswith("open_file:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", find_and_open_file(query))
+        elif action.startswith("schedule_meeting:"):
+            details = action.split(":", 1)[1].strip()
+            when_text, title = details.split("|", 1)
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
