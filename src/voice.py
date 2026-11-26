@@ -16,3 +16,6 @@ oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
 recognizer = sr.Recognizer()
 recognizer.pause_threshold = config.mic_pause_threshold
 
+# opening the mic stream ONCE here instead of every time listen_for_wakeword runs.
+# opening/closing it constantly was making the laptop chirp every loop
+_audio = pyaudio.PyAudio()
