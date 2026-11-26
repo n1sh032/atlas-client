@@ -3,6 +3,9 @@ import subprocess
 import difflib
 import pickle
 import dateparser
+import numpy as np
+import sys
+import pyaudiowpatch as pyaudio
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
