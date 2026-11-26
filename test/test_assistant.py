@@ -37,3 +37,6 @@ def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch
         function_call=SimpleNamespace(name="close_app", args={"query": "Notepad"}),
     )
     result = SimpleNamespace(candidates=[SimpleNamespace(content=SimpleNamespace(parts=[part]))])
+    generate = assistant.client.models.generate_content
+    generate.side_effect = [FakeAPIError(), result]
+
