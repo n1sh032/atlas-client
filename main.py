@@ -135,6 +135,7 @@ def send_discord_message(message):
 
 
 
+
 def close_app(query):
     running = []
     for proc in psutil.process_iter(["pid", "name"]):
