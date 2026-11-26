@@ -305,7 +305,7 @@ draft: <what they want written, keep their original request/topic intact>
 
 message: "{text}"
 """
-    res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+    res = client.models.generate_content(model="gemini-3.1-flash-lite", contents=prompt)
     return res.text.strip().lower()
 
 
