@@ -112,6 +112,9 @@ def save_history():
         temporary = None
     except Exception as e:
         print(f"atlas: couldnt save memory ({e})")
+    finally:
+        if temporary and os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 chat_history = load_history()
