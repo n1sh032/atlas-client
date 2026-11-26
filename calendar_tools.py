@@ -13,3 +13,6 @@ import config
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
+
+def get_calendar_service():
+    creds = None
