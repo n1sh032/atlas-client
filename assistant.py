@@ -130,3 +130,9 @@ def talk_to_atlas(user_text):
 
     parts = res.candidates[0].content.parts
     reply = ""
+    did_stuff = []
+
+    for p in parts:
+        call = getattr(p, "function_call", None)
+        if call:
+            fn = call.name
