@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def main():
-    print("JARVIS-lite is online. Type 'exit' to quit.")
+    print("atlas is online. type exit to quit")
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
