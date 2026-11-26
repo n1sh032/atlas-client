@@ -231,6 +231,9 @@ def mute_toggle():
     current = vol.GetMute()
     vol.SetMute(not current, None)
     return "muted" if not current else "unmuted"
+
+def set_brightness(level):
+    sbc.set_brightness(level)
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
