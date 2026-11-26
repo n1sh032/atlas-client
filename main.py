@@ -37,6 +37,13 @@ def open_explorer():
     os.startfile(os.path.expanduser("~"))
     return "opening file explorer"
 
+def find_and_open_file(query):
+    # just check these 3 folders for now, good enough
+    folders = [
+        os.path.join(os.path.expanduser("~"), "Desktop"),
+        os.path.join(os.path.expanduser("~"), "Documents"),
+        os.path.join(os.path.expanduser("~"), "Downloads"),
+    ]
 
 # action name -> function
 actions = {
