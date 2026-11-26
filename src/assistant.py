@@ -169,6 +169,7 @@ def talk_to_atlas(user_text):
     if did_stuff:
         reply = " and ".join(result.split(" -> ", 1)[1] for result in did_stuff)
     reply = reply or "Gemini did not return a reply."
+    chat_history.extend([user_message, {"role": "model", "parts": [{"text": reply}]}])
 
     if len(chat_history) > config.chat_history_cap:
         del chat_history[:2]  # dont let this grow forever
