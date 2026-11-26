@@ -148,3 +148,6 @@ def talk_to_atlas(user_text):
 
     if len(chat_history) > config.chat_history_cap:
         del chat_history[:2]  # dont let this grow forever
+
+    save_history()
+
