@@ -240,6 +240,7 @@ def lock_screen():
     subprocess.Popen(["rundll32.exe", "user32.dll,LockWorkStation"])
     return "locking screen"
 
+
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
