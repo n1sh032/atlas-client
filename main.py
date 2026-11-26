@@ -171,6 +171,9 @@ def listen_for_wakeword():
                          input=True, frames_per_buffer=1280)
 
     print("listening for 'hey jarvis'...")
+
+    while True:
+        chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
 def main():
     print("atlas is online. type exit to quit")
     while True:
