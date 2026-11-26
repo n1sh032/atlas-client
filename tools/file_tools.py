@@ -82,3 +82,6 @@ def track_recent(filepath):
         recent_files.pop(0)
 
 
+def open_last_file():
+    if not recent_files:
+        return "i dont have a record of a recently opened file"
