@@ -80,7 +80,6 @@ actions = {
     "explorer": open_explorer,
 }
 
-# exact phrases so it doesnt need to call gemini every time
 exact = {
     "open notepad": "notepad",
     "open downloads": "downloads",
