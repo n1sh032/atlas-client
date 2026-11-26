@@ -52,3 +52,12 @@ def listen_for_command():
             audio = recognizer.listen(source, timeout=config.mic_timeout, phrase_time_limit=config.mic_phrase_limit)
         except sr.WaitTimeoutError:
             print("atlas: didnt hear anything, going back to sleep")
+            return None
+
+    try:
+        text = recognizer.recognize_google(audio)
+        print(f"heard: {text}")
+        return text
+    except sr.UnknownValueError:
+        print("atlas: didnt catch that")
+        return None
