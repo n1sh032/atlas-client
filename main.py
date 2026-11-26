@@ -425,6 +425,9 @@ tool_functions = {
     "close_app": lambda query: close_app(query),
     "find_and_open_file": lambda query: find_and_open_file(query),
     "open_last_file": lambda: open_last_file(),
+    "schedule_meeting": lambda when_text, title: schedule_meeting(when_text, title),
+    "google_search": lambda query: google_search(query),
+    "set_volume": lambda level: set_volume(level),
 }
 
 
