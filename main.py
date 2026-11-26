@@ -125,6 +125,9 @@ def send_discord_message(message):
     if not windows:
         return "discord doesnt seem to be open, opening it first"
 
+    win = gw.getWindowsWithTitle(windows[0])[0]
+    win.activate()
+
 
 def close_app(query):
     running = []
