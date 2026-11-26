@@ -125,6 +125,9 @@ def close_app(query):
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
 
+    running_clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
+
+
 
 def get_calendar_service():
     creds = None
