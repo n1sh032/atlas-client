@@ -108,6 +108,8 @@ def save_history():
         with NamedTemporaryFile(mode="w", dir=folder, delete=False) as f:
             temporary = f.name
             json.dump(chat_history, f)
+        os.replace(temporary, config.memory_file)
+        temporary = None
     except Exception as e:
         print(f"atlas: couldnt save memory ({e})")
 
