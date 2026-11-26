@@ -227,7 +227,8 @@ def draft_document(topic):
     doc.save(filepath)
 
     os.startfile(filepath)
-    return f"drafted and saved: {filename}"
+    track_recent(filepath)
+    return f"drafted and saved: {safe_name}.docx"
 
 
 def get_calendar_service():
