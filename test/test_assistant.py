@@ -22,3 +22,9 @@ def assistant(tmp_path, monkeypatch):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch):
+    class FakeAPIError(Exception):
+        code = 503
+
