@@ -37,3 +37,6 @@ def draft_document(topic):
     os.startfile(filepath)
 
     # importing here instead of top of file to dodge a circular import
+    # (file_tools doesnt need content_tools, but this is the one spot
+    # they touch)
+    from file_tools import track_recent
