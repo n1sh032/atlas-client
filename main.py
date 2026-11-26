@@ -263,7 +263,7 @@ exact = {
 def ask_gemini(text):
     opts = "\n".join(actions.keys())
     prompt = f"""you are a command parser for atlas.
-if user wants to open an app, reply with ONLY one word from this list:
+if user wants one of these specific things, reply with ONLY one word from this list:
 
 {opts}
 open_file
