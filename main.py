@@ -85,9 +85,6 @@ def main():
 
         if cmd in exact:
             action = exact[cmd]
-            os.startfile(dl_path)
-            print("Atlas: opening downloads folder")
-
         elif cmd == "open chrome":
             subprocess.Popen([r"C:\Program Files\Google\Chrome\Application\chrome.exe"])
             print("Atlas: opening chrome")
