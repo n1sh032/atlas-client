@@ -34,3 +34,6 @@ def type_in_notepad(text):
     pyautogui.write(text, interval=0.02)
     return f"typed in notepad: {text}"
 
+
+def type_in_discord(text):
+    windows = [w for w in gw.getAllTitles() if "discord" in w.lower()]
