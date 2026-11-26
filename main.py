@@ -138,6 +138,7 @@ def find_and_open_file(query):
 
 
 def find_and_open_app(query):
+    query = query.lower()
     if "spotify" in query:
         os.startfile("spotify:")
         return "opening spotify"
