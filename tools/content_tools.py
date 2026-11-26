@@ -13,3 +13,6 @@ from src.gemini_client import client
 def google_search(query):
     url = f"https://www.google.com/search?q={quote_plus(query)}"
     webbrowser.open(url)
+    return f"searching google for {query}"
+
+
