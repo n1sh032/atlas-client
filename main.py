@@ -284,7 +284,9 @@ if its closing/killing an app, reply like this:
 close_app: <name of the app>
 
 if its schedule_meeting, reply like this instead:
-schedule_meeting: <when they said, keep it natural, eg "tomorrow at 3pm">|<short title for the meeting>
+schedule_meeting: <when they said, eg "tomorrow at 3pm">|<short title for the meeting>
+
+if its a web search request, or asking about something real-time/current
 
 message: "{text}"
 """
