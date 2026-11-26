@@ -10,3 +10,6 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc
 import pygetwindow as gw
+import pyautogui
+
+
