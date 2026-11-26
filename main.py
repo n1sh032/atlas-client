@@ -145,6 +145,9 @@ def close_app(query):
 def google_search(query):
     url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
     webbrowser.open(url)
+    return f"searching google for {query}"
+
+
 
 
 def get_calendar_service():
