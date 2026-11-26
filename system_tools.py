@@ -70,3 +70,6 @@ def skip_song():
 def previous_song():
     return media_key("prev")
 
+
+def play_pause():
+    return media_key("play_pause")
