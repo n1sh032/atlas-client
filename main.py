@@ -523,6 +523,7 @@ def talk_to_atlas_safe(user_text):
 
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
 recognizer = sr.Recognizer()
+recognizer.pause_threshold = 1.8
 
 def listen_for_wakeword():
     audio = pyaudio.PyAudio()
