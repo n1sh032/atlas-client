@@ -92,6 +92,12 @@ def open_explorer():
     return "opening file explorer"
 
 
+recent_files = []
+
+def track_recent(filepath):
+    recent_files.append(filepath)
+    if len(recent_files) > 5:
+        recent_files.pop(0)
 def find_and_open_file(query):
     folders = [
         os.path.join(os.path.expanduser("~"), "Desktop"),
