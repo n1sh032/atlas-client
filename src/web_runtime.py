@@ -13,3 +13,6 @@ ASSETS = {
     "/style.css": ("style.css", "text/css"),
 }
 
+
+def serve(application, assets, name, port):
+    worker = ThreadPoolExecutor(max_workers=1)
