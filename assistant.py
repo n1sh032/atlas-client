@@ -67,3 +67,27 @@ tools = [
          "app_name": {"type": "string"}, "action": {"type": "string"}}, "required": ["app_name", "action"]}},
 ]
 
+# links the tool name gemini picks back to the actual function that does the thing
+tool_functions = {
+    "open_app": lambda query: file_tools.find_and_open_app(query),
+    "close_app": lambda query: file_tools.close_app(query),
+    "find_and_open_file": lambda query: file_tools.find_and_open_file(query),
+    "open_last_file": lambda: file_tools.open_last_file(),
+    "schedule_meeting": lambda when_text, title: calendar_tools.schedule_meeting(when_text, title),
+    "google_search": lambda query: content_tools.google_search(query),
+    "set_volume": lambda level: system_tools.set_volume(level),
+    "set_brightness": lambda level: system_tools.set_brightness(level),
+    "mute_toggle": lambda: system_tools.mute_toggle(),
+    "lock_screen": lambda: system_tools.lock_screen(),
+    "draft_document": lambda topic: content_tools.draft_document(topic),
+    "type_in_notepad": lambda text: file_tools.type_in_notepad(text),
+    "type_in_discord": lambda text: file_tools.type_in_discord(text),
+    "open_downloads": lambda: file_tools.open_downloads(),
+    "open_explorer": lambda: file_tools.open_explorer(),
+    "skip_song": lambda: system_tools.skip_song(),
+    "previous_song": lambda: system_tools.previous_song(),
+    "play_pause": lambda: system_tools.play_pause(),
+    "send_app_shortcut": lambda app_name, action: system_tools.send_app_shortcut(app_name, action),
+}
+
+
