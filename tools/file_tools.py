@@ -25,3 +25,6 @@ def type_in_notepad(text):
     win = gw.getWindowsWithTitle(windows[0])[0]
     if win.isMinimized:
         win.restore()
+    win.activate()
+    time.sleep(1)
+    active = gw.getActiveWindow()
