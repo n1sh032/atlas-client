@@ -61,3 +61,6 @@ def listen_for_command():
     except sr.UnknownValueError:
         print("atlas: didnt catch that")
         return None
+    except sr.WaitTimeoutError:
+        print("atlas: didnt hear anything, going back to sleep")
+        return None
