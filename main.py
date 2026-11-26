@@ -270,6 +270,8 @@ open_file
 open_app
 close_app
 schedule_meeting
+set_volume
+set_brightness
 unknown
 
 if its open_file, reply like this instead:
