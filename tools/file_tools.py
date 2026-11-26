@@ -175,6 +175,7 @@ def close_app(query):
         if (proc.info["name"] or "").lower().removesuffix(".exe") == name
         and proc.info["pid"] != os.getpid()
     }
+    windows = []
 
     for orig, c in zip(running, clean):
         if query.lower() in c.lower():
