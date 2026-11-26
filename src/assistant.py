@@ -4,3 +4,6 @@
 import json
 import os
 from src import config
+from src.gemini_client import client
+
+from tools import file_tools
