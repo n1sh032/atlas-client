@@ -55,3 +55,6 @@ class AtlasApplication:
 
 def main():
     parser = argparse.ArgumentParser(description="Atlas desktop dashboard")
+    parser.add_argument("--port", type=int, default=8010)
+    args = parser.parse_args()
+    root = Path(__file__).resolve().parents[1]
