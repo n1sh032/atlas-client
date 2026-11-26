@@ -10,3 +10,6 @@ stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
                      input=True, frames_per_buffer=1280)
 
 print("listening for 'hey jarvis'... ctrl+c to stop")
+
+while True:
+    audio_chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
