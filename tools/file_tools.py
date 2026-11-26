@@ -64,3 +64,6 @@ def open_downloads():
 
 def open_cmd():
     subprocess.Popen(["cmd.exe"])
+    return "opening cmd"
+
+
