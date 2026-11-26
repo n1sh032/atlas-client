@@ -102,6 +102,9 @@ def schedule_meeting(when_text, title):
         # couldnt figure out the time, just default to 1hr from now
         start = datetime.now() + timedelta(hours=1)
 
+    end = start + timedelta(hours=1)
+
+
 
 actions = {
     "notepad": open_notepad,
