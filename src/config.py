@@ -2,7 +2,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-gemini_model = "gemini-3.6-flash"       # switch this if it starts throwing 429s
+project_root = Path(__file__).resolve().parents[1]
+load_dotenv(project_root / ".env")
+gemini_model = os.getenv("ATLAS_GEMINI_MODEL", "gemini-3.6-flash")
 draft_model = "gemini-3.1-flash-lite"   # used just for draft_document, dont need tool calling for that
 
 timezone = "Asia/Singapore"
