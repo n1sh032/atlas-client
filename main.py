@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 def main():
     print("JARVIS-lite is online. Type 'exit' to quit.")
     while True:
