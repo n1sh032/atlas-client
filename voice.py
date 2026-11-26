@@ -67,3 +67,6 @@ def listen_for_command():
         print("atlas: didnt hear anything, going back to sleep")
         return None
 
+
+def speak(text):
+    print("Atlas:", text)
