@@ -25,3 +25,9 @@ _wake_stream = _audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
 # throw away the first few reads once at startup, mic spikes when it first opens
 for _ in range(5):
     _wake_stream.read(1280)
+
+
+def listen_for_wakeword():
+    print("listening for 'hey jarvis'...")
+
+    hits = 0
