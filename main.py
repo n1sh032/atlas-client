@@ -579,8 +579,12 @@ def listen_for_command():
 def main():
     print("atlas is online (voice mode)")
     while True:
-        listen_for_wakeword()
-        cmd = listen_for_command()
+        try:
+            listen_for_wakeword()
+            cmd = listen_for_command()
+        except KeyboardInterrupt:
+            print("shutting down")
+            save_history()
 
         if not cmd:
             continue
