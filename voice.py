@@ -22,3 +22,9 @@ def listen_for_wakeword():
     stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
                          input=True, frames_per_buffer=1280)
 
+    print("listening for 'hey jarvis'...")
+
+    for _ in range(5):
+        stream.read(1280)  # mic spikes on startup, throw these away
+
+    hits = 0
