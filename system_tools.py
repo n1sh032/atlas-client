@@ -40,3 +40,6 @@ def set_brightness(level):
     return f"brightness set to {level}%"
 
 
+def lock_screen():
+    subprocess.Popen(["rundll32.exe", "user32.dll,LockWorkStation"])
+    return "locking screen"
