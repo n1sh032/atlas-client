@@ -16,3 +16,6 @@ def open_notepad():
     return "opening notepad"
 
 
+def type_in_notepad(text):
+    subprocess.Popen(["notepad.exe"])
+    time.sleep(1)
