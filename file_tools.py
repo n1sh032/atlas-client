@@ -61,3 +61,9 @@ def open_downloads():
     dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
     os.startfile(dl_path)
     return "opening downloads folder"
+
+
+def open_cmd():
+    subprocess.Popen(["cmd.exe"])
+    return "opening cmd"
+
