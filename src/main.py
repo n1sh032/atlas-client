@@ -19,3 +19,6 @@ def main():
             break
         except Exception as e:
             print(f"atlas: listening broke ({e}), trying again")
+            time.sleep(2)
+            continue
+
