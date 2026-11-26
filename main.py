@@ -126,6 +126,7 @@ def main():
         if action.startswith("open_file:"):
             query = action.split(":", 1)[1].strip()
             print("Atlas:", find_and_open_file(query))
+        elif action in actions:
             print("Atlas:", actions[action]())
         else:
             print("Atlas: idk that command yet")
