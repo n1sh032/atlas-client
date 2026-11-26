@@ -22,6 +22,9 @@ def main():
             print("Atlas: opening Google Chrome")
         elif cmd == "open command prompt":
             subprocess.Popen(["cmd.exe"])
+            print("Atlas: opening command prompt")
+        elif cmd == "open calculator":
+            subprocess.Popen(["calc.exe"])
 
         else:
             print("Atlas: not sure of that command yet")
