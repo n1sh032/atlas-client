@@ -176,9 +176,6 @@ def find_and_open_app(query):
             os.startfile(p)
             return f"opening {n}"
 
-def send_discord_message(message):
-    windows = [w for w in gw.getAllTitles() if "discord" in w.lower()]
-
     if not windows:
         return "discord doesnt seem to be open, opening it first"
 
