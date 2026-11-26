@@ -105,7 +105,6 @@ def schedule_meeting(when_text, title):
 
     start = dateparser.parse(when_text)
     if not start:
-        # couldnt figure out the time, just default to 1hr from now
         start = datetime.now() + timedelta(hours=1)
 
     end = start + timedelta(hours=1)
