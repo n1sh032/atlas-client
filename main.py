@@ -70,11 +70,8 @@ unknown
 
 message: "{text}"
 """
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-    return response.text.strip().lower()
+    res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+    return res.text.strip().lower()
 
 
 def main():
