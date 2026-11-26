@@ -19,3 +19,12 @@ def serve(application, assets, name, port):
     lock = Lock()
     state = {"busy": False, "result": None, "error": None, "revision": 0}
     allowed = {f"{name}.localhost:{port}", f"127.0.0.1:{port}"}
+
+    def run(action, payload):
+        try:
+            result = application.execute(action, payload)
+            with lock:
+                state.update(result=result, error=None)
+        except (ValueError, OSError) as exc:
+            with lock:
+                state.update(error=str(exc))
