@@ -175,6 +175,8 @@ def draft_document(topic):
         doc.add_paragraph(line)
     doc.save(filepath)
 
+    os.startfile(filepath)
+    return f"drafted and saved: {filename}"
 
 
 def get_calendar_service():
