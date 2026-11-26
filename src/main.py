@@ -22,3 +22,6 @@ def main():
             time.sleep(2)
             continue
 
+        if not cmd:
+            continue
+
