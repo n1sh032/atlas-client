@@ -70,3 +70,6 @@ def open_cmd():
 def open_explorer():
     os.startfile(os.path.expanduser("~"))
     return "opening file explorer"
+
+
+# tracks files atlas has opened so "open the file i just closed" kinda works.
