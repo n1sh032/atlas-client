@@ -13,3 +13,8 @@ print("listening for 'hey jarvis'... ctrl+c to stop")
 
 while True:
     audio_chunk = np.frombuffer(stream.read(1280), dtype=np.int16)
+    prediction = oww_model.predict(audio_chunk)
+
+    for wakeword, score in prediction.items():
+        if score > 0.5:
+            print(f"detected: {wakeword} (confidence: {score:.2f})")
