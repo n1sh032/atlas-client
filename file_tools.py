@@ -160,3 +160,12 @@ def find_and_open_app(query):
         if n == best:
             os.startfile(p)
             return f"opening {n}"
+
+
+def close_app(query):
+    running = []
+    for proc in psutil.process_iter(["pid", "name"]):
+        try:
+            running.append(proc.info["name"])
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
