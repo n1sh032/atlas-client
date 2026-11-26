@@ -219,8 +219,7 @@ def draft_document(topic):
     os.makedirs(drafts_folder, exist_ok=True)
 
     safe_name = "".join(c for c in topic if c.isalnum() or c == " ").strip()[:40]
-    filename = f"{safe_name}.docx"
-    filepath = os.path.join(drafts_folder, filename)
+    filepath = os.path.join(drafts_folder, f"{safe_name}.docx")
 
     doc = Document()
     for line in content.split("\n"):
