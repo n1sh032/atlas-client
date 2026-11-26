@@ -40,3 +40,15 @@ class AtlasApplication:
                 "kind": "error",
             }
         from src.assistant import talk_to_atlas
+
+        try:
+            reply = talk_to_atlas(
+                message.strip(), allow_actions=payload.get("allow_actions") is True
+            )
+        except Exception as exc:
+            return {
+                "message": f"Atlas could not complete the request ({type(exc).__name__}). Check model access and credentials.",
+                "kind": "error",
+            }
+        return {"message": reply, "kind": "reply"}
+
