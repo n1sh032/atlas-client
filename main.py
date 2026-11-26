@@ -6,6 +6,8 @@ import dateparser
 import numpy as np
 import sys
 import pyaudiowpatch as pyaudio
+sys.modules["pyaudio"] = pyaudio
+import speech_recognition as sr
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
