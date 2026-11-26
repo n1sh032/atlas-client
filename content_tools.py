@@ -16,3 +16,9 @@ def google_search(query):
     return f"searching google for {query}"
 
 
+def draft_document(topic):
+    res = client.models.generate_content(
+        model=config.draft_model,
+        contents=f"write the following, just the content, no preamble: {topic}"
+    )
+    content = res.text.strip()
