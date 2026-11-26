@@ -37,3 +37,6 @@ def serve(application, assets, name, port):
                 state["busy"] = False
                 state["revision"] += 1
 
+    class Handler(BaseHTTPRequestHandler):
+        def reply(self, status, value):
+            body = json.dumps(value).encode()
