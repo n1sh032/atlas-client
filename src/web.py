@@ -34,3 +34,9 @@ class AtlasApplication:
                 "message": "Atlas desktop actions require Windows.",
                 "kind": "error",
             }
+        if not self.describe()["configured"]:
+            return {
+                "message": "Add GEMINI_API_KEY to the local .env file, then try again.",
+                "kind": "error",
+            }
+        from src.assistant import talk_to_atlas
