@@ -42,9 +42,6 @@ def open_cmd():
     subprocess.Popen(["cmd.exe"])
     return "opening cmd"
 
-
-def open_vscode():
-    subprocess.Popen(["code"])
     return "opening vscode"
 
 def open_explorer():
