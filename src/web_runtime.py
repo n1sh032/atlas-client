@@ -82,3 +82,21 @@ def serve(application, assets, name, port):
                 return
             if self.path != "/api/actions":
                 self.reply(404, {"error": "Action endpoint not found"})
+                return
+            try:
+                size = int(self.headers.get("Content-Length", "0"))
+                if not 0 < size <= 65536:
+                    raise ValueError("Request must be between 1 and 65536 bytes")
+                request = json.loads(self.rfile.read(size))
+                if not isinstance(request, dict) or not isinstance(
+                    request.get("action"), str
+                ):
+                    raise ValueError("An action is required")
+                payload = request.get("payload", {})
+                if not isinstance(payload, dict):
+                    raise ValueError("Payload must be an object")
+                if request["action"] not in application.actions:
+                    raise ValueError("Unknown action")
+            except (ValueError, UnicodeError) as exc:
+                self.reply(400, {"error": str(exc)})
+                return
