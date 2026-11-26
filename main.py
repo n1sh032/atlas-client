@@ -594,7 +594,7 @@ def main():
         if not cmd:
             continue
 
-        if cmd == "exit":
+        if cmd.strip().lower() == "exit":
             print("shutting down")
             break
 
