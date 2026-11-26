@@ -558,7 +558,11 @@ def listen_for_command():
     with sr.Microphone() as source:
         print("listening for command...")
         recognizer.adjust_for_ambient_noise(source, duration=0.5)
-        audio = recognizer.listen(source, timeout=5, phrase_time_limit=6)
+        try:
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=20)
+        except sr.WaitTimeoutError:
+            print("atlas: didnt hear anything, going back to sleep")
+            return None
 
     try:
         text = recognizer.recognize_google(audio)
