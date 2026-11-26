@@ -13,3 +13,6 @@ import pygetwindow as gw
 import pyautogui
 
 
+def get_volume_interface():
+    comtypes.CoInitialize()  # needed or pycaw throws sometimes
+    devices = AudioUtilities.GetSpeakers()
