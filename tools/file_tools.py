@@ -139,3 +139,6 @@ def find_and_open_app(query):
             for f in files:
                 if f.lower().endswith(".lnk"):
                     shortcuts.append((f[:-4], os.path.join(root, f)))
+
+    if not shortcuts:
+        return "cant find any installed apps"
