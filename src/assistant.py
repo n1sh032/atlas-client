@@ -102,6 +102,7 @@ def load_history():
 
 
 def save_history():
+    temporary = None
     try:
         with open(config.memory_file, "w") as f:
             json.dump(chat_history, f)
