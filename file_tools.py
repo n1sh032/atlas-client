@@ -109,3 +109,12 @@ def find_and_open_file(query):
     if not files:
         return "no files to search"
 
+    names = [n for n, p in files]
+    match = difflib.get_close_matches(query, names, n=1, cutoff=config.file_match_cutoff)
+    if not match:
+        return f"couldnt find anything matching '{query}'"
+
+    for n, p in files:
+        if n == match[0]:
+            os.startfile(p)
+            track_recent(p)
