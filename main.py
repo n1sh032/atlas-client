@@ -395,6 +395,9 @@ def main():
         elif action.startswith("set_brightness:"):
             level = int(action.split(":", 1)[1].strip())
             print("Atlas:", set_brightness(level))
+        elif action.startswith("draft:"):
+            topic = action.split(":", 1)[1].strip()
+            print("Atlas:", draft_document(topic))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
