@@ -31,3 +31,9 @@ def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch
     monkeypatch.setattr(assistant, "APIError", FakeAPIError)
     monkeypatch.setattr(assistant.time, "sleep", Mock())
     action = Mock(return_value="No visible window found.")
+    monkeypatch.setitem(assistant.tool_functions, "close_app", action)
+    part = SimpleNamespace(
+        text="Closed it.",
+        function_call=SimpleNamespace(name="close_app", args={"query": "Notepad"}),
+    )
+    result = SimpleNamespace(candidates=[SimpleNamespace(content=SimpleNamespace(parts=[part]))])
