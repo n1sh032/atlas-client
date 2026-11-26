@@ -160,3 +160,6 @@ def find_and_open_app(query):
             os.startfile(p)
             return f"opening {n}"
 
+
+def close_app(query):
+    running = []
