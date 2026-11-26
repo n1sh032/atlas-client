@@ -83,9 +83,8 @@ def main():
             print("shutting down")
             break
 
-        elif cmd == "open notepad":
-            subprocess.Popen(["notepad.exe"])
-            print("Atlas: opening notepad")
+        if cmd in exact:
+            action = exact[cmd]
 
         elif cmd == "open downloads":
             dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
