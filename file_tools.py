@@ -76,3 +76,6 @@ def open_explorer():
 # tracks files atlas has opened so "open the file i just closed" kinda works.
 # only knows about stuff opened through atlas, not files you opened yourself
 recent_files = []
+
+def track_recent(filepath):
+    recent_files.append(filepath)
