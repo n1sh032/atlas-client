@@ -40,3 +40,6 @@ def draft_document(topic):
     # (file_tools doesnt need content_tools, but this is the one spot
     # they touch)
     from file_tools import track_recent
+    track_recent(filepath)
+
+    return f"drafted and saved: {safe_name}.docx"
