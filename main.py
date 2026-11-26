@@ -422,6 +422,9 @@ def main():
             print("Atlas:", draft_document(topic))
         elif action in actions:
             print("Atlas:", actions[action]())
+        elif action.startswith("discord:"):
+            message = action.split(":", 1)[1].strip()
+            print("Atlas:", send_discord_message(message))
         else:
             print("Atlas: idk that command yet")
 
