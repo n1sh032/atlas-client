@@ -70,3 +70,9 @@ def speak(text):
     print("Atlas:", text)
     # making a new engine every time instead of reusing one, since pyttsx3
     # goes silent after the first call otherwise on windows (sapi5 quirk)
+    engine = pyttsx3.init()
+    engine.setProperty("rate", config.tts_rate)
+    if config.tts_voice_index is not None:
+        voices = engine.getProperty("voices")
+        engine.setProperty("voice", voices[config.tts_voice_index].id)
+    engine.say(text)
