@@ -9,6 +9,7 @@ import sys
 import time
 import ctypes
 import webbrowser
+from urllib.parse import quote_plus
 import psutil
 import pyaudiowpatch as pyaudio
 sys.modules["pyaudio"] = pyaudio
