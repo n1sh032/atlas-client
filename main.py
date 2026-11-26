@@ -36,6 +36,7 @@ def main():
         if cmd == "exit":
             print("shutting down")
             break
+
         elif cmd == "open notepad":
             subprocess.Popen(["notepad.exe"])
             print("Atlas: opening notepad")
