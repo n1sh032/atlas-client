@@ -104,7 +104,9 @@ def load_history():
 def save_history():
     temporary = None
     try:
-        with open(config.memory_file, "w") as f:
+        folder = os.path.dirname(os.path.abspath(config.memory_file))
+        with NamedTemporaryFile(mode="w", dir=folder, delete=False) as f:
+            temporary = f.name
             json.dump(chat_history, f)
     except Exception as e:
         print(f"atlas: couldnt save memory ({e})")
