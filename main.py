@@ -13,6 +13,8 @@ from google.auth.transport.requests import Request
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
+
 
 def open_notepad():
     subprocess.Popen(["notepad.exe"])
