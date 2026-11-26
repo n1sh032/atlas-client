@@ -112,3 +112,9 @@ def find_and_open_file(query):
     match = difflib.get_close_matches(query, names, n=1, cutoff=config.file_match_cutoff)
     if not match:
         return f"couldnt find anything matching '{query}'"
+
+    for n, p in files:
+        if n == match[0]:
+            os.startfile(p)
+            track_recent(p)
+            return f"opening {n}"
