@@ -129,7 +129,7 @@ system_msg = ("you are atlas, the users desktop assistant on windows. talk casua
               "keep it short, 1-3 sentences, this basically gets read out loud")
 
 
-def talk_to_atlas(user_text):
+def talk_to_atlas(user_text, allow_actions=True):
     user_message = {"role": "user", "parts": [{"text": user_text}]}
 
     for attempt in range(3):
