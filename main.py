@@ -265,7 +265,7 @@ def schedule_meeting(when_text, title):
     }
 
     created = service.events().insert(calendarId="primary", body=event).execute()
-    return f"scheduled '{title}' for {start.strftime('%d %b, %I:%M %p')}, check calendar: {created.get('htmlLink')}"
+    return f"scheduled '{title}' for {start.strftime('%d %b, %I:%M %p')}, {created.get('htmlLink')}"
 
 
 def get_volume_interface():
