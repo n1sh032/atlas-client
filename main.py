@@ -177,6 +177,7 @@ def main():
         elif action.startswith("schedule_meeting:"):
             details = action.split(":", 1)[1].strip()
             when_text, title = details.split("|", 1)
+            print("Atlas:", schedule_meeting(when_text.strip(), title.strip()))
         elif action in actions:
             print("Atlas:", actions[action]())
         else:
