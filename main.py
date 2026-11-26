@@ -94,6 +94,15 @@ def find_and_open_app(query):
             for f in files:
                 if f.lower().endswith(".lnk"):
                     name = f[:-4]
+                    shortcuts.append((name, os.path.join(root, f)))
+
+    if not shortcuts:
+        return "couldnt find any installed apps"
+
+    for n, p in shortcuts:
+        if query in n.lower():
+            os.startfile(p)
+            return f"opening {n}"
 
 
 def get_calendar_service():
