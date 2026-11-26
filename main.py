@@ -42,8 +42,6 @@ def open_cmd():
     subprocess.Popen(["cmd.exe"])
     return "opening cmd"
 
-    return "opening vscode"
-
 def open_explorer():
     os.startfile(os.path.expanduser("~"))
     return "opening file explorer"
