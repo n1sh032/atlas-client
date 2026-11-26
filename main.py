@@ -104,6 +104,9 @@ def find_and_open_app(query):
             os.startfile(p)
             return f"opening {n}"
 
+    names = [n for n, p in shortcuts]
+    match = difflib.get_close_matches(query, names, n=3, cutoff=0.6)
+
 
 def get_calendar_service():
     creds = None
