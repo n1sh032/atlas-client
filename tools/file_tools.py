@@ -22,3 +22,6 @@ def type_in_notepad(text):
     windows = [w for w in gw.getAllTitles() if "notepad" in w.lower()]
     if not windows:
         return "couldnt focus notepad, didnt type anything"
+    win = gw.getWindowsWithTitle(windows[0])[0]
+    if win.isMinimized:
+        win.restore()
