@@ -269,6 +269,7 @@ def schedule_meeting(when_text, title):
 
 
 def get_volume_interface():
+    comtypes.CoInitialize()  # needed or pycaw throws sometimes
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     return cast(interface, POINTER(IAudioEndpointVolume))
