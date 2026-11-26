@@ -296,12 +296,12 @@ def lock_screen():
     return "locking screen"
 
 
-actions = {
-    "notepad": open_notepad,
-    "downloads": open_downloads,
-    "cmd": open_cmd,
-    "explorer": open_explorer,
-    "lock_screen": lock_screen,
+# windows media key codes, works for spotify/yt/vlc/etc, anything that
+# hooks into the system media session
+def media_key(key_name):
+    keys = {
+        "play_pause": 0xB3,
+        "next": 0xB0,
     "mute": mute_toggle,
 }
 
