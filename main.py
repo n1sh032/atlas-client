@@ -127,6 +127,9 @@ def send_discord_message(message):
 
     win = gw.getWindowsWithTitle(windows[0])[0]
     win.activate()
+    time.sleep(1)  # give windows time to actually bring it to front
+
+    pyautogui.typewrite(message, interval=0.02)
 
 
 def close_app(query):
