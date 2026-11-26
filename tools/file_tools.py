@@ -49,3 +49,9 @@ def type_in_discord(text):
     pyautogui.write(text, interval=0.02)
     pyautogui.press("enter")
     return f"sent to discord: {text}"
+
+
+def open_camera():
+    os.startfile("microsoft.windows.camera:")
+    return "opening camera"
+
