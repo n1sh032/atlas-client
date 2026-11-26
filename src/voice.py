@@ -40,3 +40,6 @@ def listen_for_wakeword():
             hits += 1
             if hits >= config.wake_hits_needed:
                 return
+        else:
+            hits = 0
+
