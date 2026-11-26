@@ -40,3 +40,6 @@ def serve(application, assets, name, port):
     class Handler(BaseHTTPRequestHandler):
         def reply(self, status, value):
             body = json.dumps(value).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
