@@ -67,3 +67,6 @@ def open_cmd():
     return "opening cmd"
 
 
+def open_explorer():
+    os.startfile(os.path.expanduser("~"))
+    return "opening file explorer"
