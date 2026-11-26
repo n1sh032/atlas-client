@@ -4,6 +4,7 @@
 import json
 import os
 import time
+from contextlib import suppress
 from tempfile import NamedTemporaryFile
 from google.genai.errors import APIError
 from src import config
