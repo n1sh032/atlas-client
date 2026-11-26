@@ -61,3 +61,6 @@ def serve(application, assets, name, port):
                 self.reply(200, value)
                 return
             asset = ASSETS.get(self.path)
+            if asset is None:
+                self.reply(404, {"error": "Page not found"})
+                return
