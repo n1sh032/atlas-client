@@ -64,3 +64,9 @@ def listen_for_command():
     except sr.WaitTimeoutError:
         print("atlas: didnt hear anything, going back to sleep")
         return None
+
+
+def speak(text):
+    print("Atlas:", text)
+    # making a new engine every time instead of reusing one, since pyttsx3
+    # goes silent after the first call otherwise on windows (sapi5 quirk)
