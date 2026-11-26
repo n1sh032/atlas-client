@@ -148,3 +148,6 @@ def find_and_open_app(query):
     for n, p in shortcuts:
         if query in n.lower():
             os.startfile(p)
+            return f"opening {n}"
+
+    names = [n for n, p in shortcuts]
