@@ -40,3 +40,9 @@ def schedule_meeting(when_text, title):
         start = datetime.now() + timedelta(hours=1)  # couldnt parse it, just default
 
     end = start + timedelta(hours=1)
+
+    event = {
+        "summary": title,
+        "start": {"dateTime": start.isoformat(), "timeZone": config.timezone},
+        "end": {"dateTime": end.isoformat(), "timeZone": config.timezone},
+    }
