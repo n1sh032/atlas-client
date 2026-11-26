@@ -210,8 +210,8 @@ def google_search(query):
 
 def draft_document(topic):
     res = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        contents=f"write the following, just the content, no preamble or explanation: {topic}"
+        model="gemini-2.5-flash",
+        contents=f"write the following, just the content, no preamble: {topic}"
     )
     content = res.text.strip()
 
