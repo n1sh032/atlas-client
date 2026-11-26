@@ -169,6 +169,12 @@ def close_app(query):
     name = query.strip().lower().removesuffix(".exe")
     if not name:
         return "Say the exact app name to close."
+    pids = {
+        proc.info["pid"]
+        for proc in psutil.process_iter(["pid", "name"])
+        if (proc.info["name"] or "").lower().removesuffix(".exe") == name
+        and proc.info["pid"] != os.getpid()
+    }
 
     for orig, c in zip(running, clean):
         if query.lower() in c.lower():
