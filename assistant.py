@@ -136,3 +136,9 @@ def talk_to_atlas(user_text):
         call = getattr(p, "function_call", None)
         if call:
             fn = call.name
+            args = dict(call.args) if call.args else {}
+            if fn in tool_functions:
+                try:
+                    r = tool_functions[fn](**args)
+                except Exception as e:
+                    r = f"that broke: {e}"
