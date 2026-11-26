@@ -40,3 +40,6 @@ def test_retry_keeps_one_command_and_reports_tool_outcome(assistant, monkeypatch
     generate = assistant.client.models.generate_content
     generate.side_effect = [FakeAPIError(), result]
 
+    assert assistant.talk_to_atlas_safe("Close Notepad") == "No visible window found."
+    action.assert_called_once_with(query="Notepad")
+    assert generate.call_count == 2
