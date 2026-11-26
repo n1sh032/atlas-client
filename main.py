@@ -596,6 +596,7 @@ def main():
 
         if cmd.strip().lower() == "exit":
             print("shutting down")
+            save_history()
             break
 
         if cmd in exact:
