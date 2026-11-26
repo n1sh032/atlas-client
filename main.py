@@ -205,7 +205,9 @@ def listen_for_command():
 def main():
     print("atlas is online (voice mode)")
     while True:
-        cmd = input("You: ").strip().lower()
+        listen_for_wakeword()
+        cmd = listen_for_command()
+
 
         if cmd == "exit":
             print("shutting down")
