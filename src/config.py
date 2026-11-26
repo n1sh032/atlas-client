@@ -13,3 +13,6 @@ wake_hits_needed = 3      # needs this many hits in a row or it kept false trigg
 mic_pause_threshold = 1.8   # bumped this up bc it kept cutting me off mid sentence
 mic_timeout = 5             # how long it waits for you to start talking
 mic_phrase_limit = 20       # max length of one command
+
+# fuzzy match cutoffs, tuned these by just testing till they stopped being dumb
+file_match_cutoff = 0.45
