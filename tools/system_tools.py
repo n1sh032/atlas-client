@@ -25,3 +25,9 @@ def set_volume(level):
     vol = get_volume_interface()
     vol.SetMasterVolumeLevelScalar(level / 100, None)
     return f"volume set to {level}%"
+
+
+def mute_toggle():
+    vol = get_volume_interface()
+    current = vol.GetMute()
+    vol.SetMute(not current, None)
