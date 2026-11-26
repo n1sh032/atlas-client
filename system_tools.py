@@ -73,3 +73,6 @@ def previous_song():
 
 def play_pause():
     return media_key("play_pause")
+
+
+# per-app keyboard shortcuts, since not everything has a media key equivalent.
