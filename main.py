@@ -133,6 +133,7 @@ def find_and_open_file(query):
     for n, p in files:
         if n == match[0]:
             os.startfile(p)
+            track_recent(p)
             return f"opening {n}"
 
 
