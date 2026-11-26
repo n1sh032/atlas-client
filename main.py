@@ -297,6 +297,9 @@ answer: <the original question>
 if its setting volume, reply like this:
 set_volume: <number 0-100>
 
+if its setting brightness, reply like this:
+set_brightness: <number 0-100>
+
 message: "{text}"
 """
     res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
