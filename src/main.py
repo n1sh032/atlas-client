@@ -31,7 +31,10 @@ def main():
             break
 
         reply = talk_to_atlas_safe(cmd)
-        speak(reply)
+        try:
+            speak(reply)
+        except Exception as e:
+            print(f"atlas: couldn't speak ({type(e).__name__}): {reply}")
 
 
 if __name__ == "__main__":
