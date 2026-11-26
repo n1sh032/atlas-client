@@ -160,3 +160,6 @@ def talk_to_atlas(user_text):
         return " and ".join(x.split(" -> ", 1)[1] for x in did_stuff)
     return "done"
 
+
+def talk_to_atlas_safe(user_text):
+    import time
