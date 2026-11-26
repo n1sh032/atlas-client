@@ -28,3 +28,12 @@ def serve(application, assets, name, port):
         except (ValueError, OSError) as exc:
             with lock:
                 state.update(error=str(exc))
+        except Exception:
+            logger.exception("Application operation failed")
+            with lock:
+                state.update(error="Operation failed. Check the terminal for details.")
+        finally:
+            with lock:
+                state["busy"] = False
+                state["revision"] += 1
+
