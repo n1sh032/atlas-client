@@ -170,6 +170,12 @@ def draft_document(topic):
     filename = f"{safe_name}.docx"
     filepath = os.path.join(drafts_folder, filename)
 
+    doc = Document()
+    for line in content.split("\n"):
+        doc.add_paragraph(line)
+    doc.save(filepath)
+
+
 
 def get_calendar_service():
     creds = None
