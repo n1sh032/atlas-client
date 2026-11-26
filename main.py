@@ -7,6 +7,21 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 
+def ask_gemini(user_text):
+    prompt = f"""
+You are a command parser for a desktop assistant called Atlas.
+Given the user's message, respond with ONLY one of these exact words,
+nothing else, no punctuation:
+
+notepad
+downloads
+chrome
+cmd
+unknown
+
+User message: "{user_text}"
+"""
+
 def main():
     print("atlas is online. type exit to quit")
     while True:
