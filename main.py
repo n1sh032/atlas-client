@@ -1,5 +1,8 @@
 import os
 import subprocess
+from dotenv import load_dotenv
+from google import genai
+
 
 def main():
     print("atlas is online. type exit to quit")
