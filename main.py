@@ -6,6 +6,9 @@ import dateparser
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from google import genai
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from google.auth.transport.requests import Request
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
