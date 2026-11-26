@@ -567,7 +567,7 @@ def listen_for_command():
     try:
         text = recognizer.recognize_google(audio)
         print(f"heard: {text}")
-        return text.lower()
+        return text
     except sr.UnknownValueError:
         print("atlas: didnt catch that")
         return None
