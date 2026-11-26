@@ -275,6 +275,7 @@ def get_volume_interface():
     return cast(interface, POINTER(IAudioEndpointVolume))
 
 def set_volume(level):
+    level = max(0, min(100, int(level)))
     vol = get_volume_interface()
     vol.SetMasterVolumeLevelScalar(level / 100, None)
     return f"volume set to {level}%"
