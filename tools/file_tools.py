@@ -154,3 +154,9 @@ def find_and_open_app(query):
     if not match:
         return f"couldnt find an app matching '{query}'"
 
+    best = match[0]
+    for n, p in shortcuts:
+        if n == best:
+            os.startfile(p)
+            return f"opening {n}"
+
