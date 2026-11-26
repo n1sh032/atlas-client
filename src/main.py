@@ -28,3 +28,6 @@ def main():
         if cmd.strip().lower() == "exit":
             print("shutting down")
             save_history()
+            break
+
+        reply = talk_to_atlas_safe(cmd)
