@@ -169,3 +169,6 @@ def close_app(query):
             running.append(proc.info["name"])
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
+
+    clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
+
