@@ -61,3 +61,6 @@ def main():
     os.chdir(root)
     serve(AtlasApplication(), root / "web", "atlas", args.port)
 
+
+if __name__ == "__main__":
+    main()
