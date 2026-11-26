@@ -19,3 +19,6 @@ file_match_cutoff = 0.45
 app_open_cutoff = 0.5
 app_close_cutoff = 0.6   # higher bc closing the wrong app is way more annoying than opening one
 
+# tts
+tts_rate = 175
+tts_voice_index = None   # set this after checking voices, see readme
