@@ -22,3 +22,15 @@ class AtlasApplication:
         if action == "listen":
             from src.voice import listen_for_command
 
+            return {"transcript": listen_for_command() or "", "kind": "transcript"}
+        message = payload.get("message")
+        if not isinstance(message, str) or not message.strip() or len(message) > 4000:
+            return {
+                "message": "Enter a command between 1 and 4,000 characters.",
+                "kind": "error",
+            }
+        if os.name != "nt":
+            return {
+                "message": "Atlas desktop actions require Windows.",
+                "kind": "error",
+            }
