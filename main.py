@@ -190,7 +190,7 @@ def close_app(query):
     for orig, c in zip(running, clean):
         if query.lower() in c.lower():
             subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
-            return f"closed {original}"
+            return f"closed {orig}"
 
     match = difflib.get_close_matches(query, [c.lower() for c in running_clean], n=1, cutoff=0.6)
     if not match:
