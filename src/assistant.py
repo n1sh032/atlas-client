@@ -160,6 +160,8 @@ def talk_to_atlas(user_text):
                 except Exception as e:
                     r = f"that broke: {e}"
                 did_stuff.append(f"{fn} -> {r}")
+            else:
+                did_stuff.append(f"{fn} -> That action is unavailable.")
 
         if getattr(p, "text", None):
             reply += p.text
