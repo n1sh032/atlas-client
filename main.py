@@ -97,6 +97,7 @@ def ask_gemini(text):
 if user wants to open an app, reply with ONLY one word from this list:
 
 {opts}
+open_file
 unknown
 
 message: "{text}"
