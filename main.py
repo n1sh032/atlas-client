@@ -208,6 +208,8 @@ def main():
         listen_for_wakeword()
         cmd = listen_for_command()
 
+        if not cmd:
+            continue
 
         if cmd == "exit":
             print("shutting down")
