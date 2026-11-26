@@ -189,6 +189,18 @@ def listen_for_command():
         print("listening for command...")
         recognizer.adjust_for_ambient_noise(source, duration=0.5)
         audio = recognizer.listen(source, timeout=5, phrase_time_limit=6)
+
+    try:
+        text = recognizer.recognize_google(audio)
+        print(f"heard: {text}")
+        return text.lower()
+    except sr.UnknownValueError:
+        print("atlas: didnt catch that")
+        return None
+    except sr.WaitTimeoutError:
+        print("atlas: no command heard, going back to sleep")
+        return None
+
 def main():
     print("atlas is online. type exit to quit")
     while True:
