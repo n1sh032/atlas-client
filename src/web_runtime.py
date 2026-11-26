@@ -58,3 +58,6 @@ def serve(application, assets, name, port):
                 with lock:
                     value = dict(state)
                 value["application"] = application.describe()
+                self.reply(200, value)
+                return
+            asset = ASSETS.get(self.path)
