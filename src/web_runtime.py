@@ -100,3 +100,6 @@ def serve(application, assets, name, port):
             except (ValueError, UnicodeError) as exc:
                 self.reply(400, {"error": str(exc)})
                 return
+            with lock:
+                if state["busy"]:
+                    accepted = False
