@@ -219,6 +219,12 @@ def schedule_meeting(when_text, title):
 def get_volume_interface():
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+    return cast(interface, POINTER(IAudioEndpointVolume))
+
+def set_volume(level):
+    vol = get_volume_interface()
+    vol.SetMasterVolumeLevelScalar(level / 100, None)
+    return f"volume set to {level}%"
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
