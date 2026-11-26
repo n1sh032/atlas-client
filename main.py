@@ -38,9 +38,6 @@ def open_downloads():
     os.startfile(dl_path)
     return "opening downloads folder"
 
-def open_chrome():
-    subprocess.Popen([r"C:\Program Files\Google\Chrome\Application\chrome.exe"])
-    return "opening chrome"
 
 def open_cmd():
     subprocess.Popen(["cmd.exe"])
