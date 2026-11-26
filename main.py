@@ -175,9 +175,6 @@ def find_and_open_app(query):
         if n == best:
             os.startfile(p)
             return f"opening {n}"
-
-    win = gw.getWindowsWithTitle(windows[0])[0]
-    win.activate()
     time.sleep(1)  # give windows time to actually bring it to front
 
     pyautogui.typewrite(message, interval=0.02)
