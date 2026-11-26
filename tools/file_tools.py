@@ -175,3 +175,12 @@ def close_app(query):
         if query.lower() in c.lower():
             subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
             return f"closed {orig}"
+
+    match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
+    if not match:
+        return f"couldnt find a running app matching '{query}'"
+
+    for orig, c in zip(running, clean):
+        if c.lower() == match[0]:
+            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
+            return f"closed {orig}"
