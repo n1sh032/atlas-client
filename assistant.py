@@ -4,3 +4,6 @@
 import json
 import os
 
+import config
+from gemini_client import client
+
