@@ -43,3 +43,6 @@ def listen_for_wakeword():
     finally:
         stream.stop_stream()
         stream.close()
+        audio.terminate()
+
+
