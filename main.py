@@ -187,9 +187,9 @@ def close_app(query):
 
     clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
 
-    for original, clean in zip(running, running_clean):
-        if query in clean.lower():
-            subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
+    for orig, c in zip(running, clean):
+        if query.lower() in c.lower():
+            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
             return f"closed {original}"
 
     match = difflib.get_close_matches(query, [c.lower() for c in running_clean], n=1, cutoff=0.6)
