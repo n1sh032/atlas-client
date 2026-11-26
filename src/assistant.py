@@ -97,3 +97,12 @@ def load_history():
             return []
     return []
 
+
+def save_history():
+    try:
+        with open(config.memory_file, "w") as f:
+            json.dump(chat_history, f)
+    except Exception as e:
+        print(f"atlas: couldnt save memory ({e})")
+
+
