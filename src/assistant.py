@@ -156,7 +156,9 @@ def talk_to_atlas(user_text, allow_actions=True):
         if call:
             fn = call.name
             args = dict(call.args) if call.args else {}
-            if fn in tool_functions:
+            if not allow_actions:
+                did_stuff.append(f"{fn} -> Enable desktop actions to run this command.")
+            elif fn in tool_functions:
                 try:
                     r = tool_functions[fn](**args)
                 except Exception as e:
