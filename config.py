@@ -25,3 +25,5 @@ tts_voice_index = None   # set this after checking voices, see readme
 
 chat_history_cap = 60
 memory_file = "atlas_memory.json"
+
+drafts_folder = "atlas drafts"
