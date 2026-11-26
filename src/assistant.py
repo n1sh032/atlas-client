@@ -106,3 +106,6 @@ def save_history():
         print(f"atlas: couldnt save memory ({e})")
 
 
+chat_history = load_history()
+
+# basically its personality, told to gemini once instead of stuffing it in every message
