@@ -76,3 +76,6 @@ def speak(text):
     engine.setProperty("rate", config.tts_rate)
     if config.tts_voice_index is not None:
         voices = engine.getProperty("voices")
+        engine.setProperty("voice", voices[config.tts_voice_index].id)
+    engine.say(text)
+    engine.runAndWait()
