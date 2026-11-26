@@ -52,3 +52,6 @@ def type_in_discord(text):
     return f"sent to discord: {text}"
 
 
+def open_camera():
+    os.startfile("microsoft.windows.camera:")
+    return "opening camera"
