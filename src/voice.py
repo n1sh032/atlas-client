@@ -19,3 +19,6 @@ recognizer.pause_threshold = config.mic_pause_threshold
 # opening the mic stream ONCE here instead of every time listen_for_wakeword runs.
 # opening/closing it constantly was making the laptop chirp every loop
 _audio = pyaudio.PyAudio()
+_wake_stream = _audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
+                            input=True, frames_per_buffer=1280)
+
