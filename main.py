@@ -431,6 +431,9 @@ tool_functions = {
     "set_brightness": lambda level: set_brightness(level),
     "mute_toggle": lambda: mute_toggle(),
     "lock_screen": lambda: lock_screen(),
+    "draft_document": lambda topic: draft_document(topic),
+    "type_in_notepad": lambda text: type_in_notepad(text),
+    "type_in_discord": lambda text: type_in_discord(text),
 }
 
 
