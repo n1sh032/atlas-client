@@ -28,3 +28,6 @@ def get_calendar_service():
             creds = flow.run_local_server(port=0)
         with open("token.pickle", "wb") as f:
             pickle.dump(creds, f)
+
+    return build("calendar", "v3", credentials=creds)
+
