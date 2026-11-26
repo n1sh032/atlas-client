@@ -45,7 +45,12 @@ def find_and_open_file(query):
         os.path.join(os.path.expanduser("~"), "Downloads"),
     ]
 
-# action name -> function
+    files = []
+    for f in folders:
+        if not os.path.exists(f):
+            continue
+        for name in os.listdir(f):
+            full = os.path.join(f, name)
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
