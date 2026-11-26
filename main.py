@@ -480,7 +480,7 @@ def talk_to_atlas(user_text):
     chat_history.append({"role": "user", "parts": [{"text": user_text}]})
 
     res = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.1-flash-lite",
         contents=chat_history,
         config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
     )
