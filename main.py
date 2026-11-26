@@ -203,7 +203,7 @@ def close_app(query):
 
 
 def google_search(query):
-    url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+    url = f"https://www.google.com/search?q={quote_plus(query)}"
     webbrowser.open(url)
     return f"searching google for {query}"
 
