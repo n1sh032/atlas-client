@@ -49,8 +49,8 @@ def main():
         elif cmd == "open chrome":
             subprocess.Popen([r"C:\Program Files\Google\Chrome\Application\chrome.exe"])
             print("Atlas: opening chrome")
-            print("Atlas: opening Google Chrome")
-        elif cmd == "open command prompt":
+
+        elif cmd == "open cmd":
             subprocess.Popen(["cmd.exe"])
             print("Atlas: opening command prompt")
         elif cmd == "open calculator":
