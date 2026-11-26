@@ -443,56 +443,71 @@ tool_functions = {
 }
 
 
-def ask_gemini(text):
-    opts = "\n".join(actions.keys())
-    prompt = f"""you are a command parser for atlas.
-if user wants one of these specific things, reply with ONLY one word from this list:
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
 
-{opts}
-open_file
-open_app
-close_app
-schedule_meeting
-set_volume
-set_brightness
-unknown
+def save_history():
+    try:
+        with open(HISTORY_FILE, "w") as f:
+            json.dump(chat_history, f)
+    except Exception as e:
+        print(f"atlas: couldnt save memory ({e})")
 
-if its open_file, reply like this instead:
-open_file: <short search term for the file>
 
-if user wants to send a discord message, reply like this:
-discord: <the message to send>
+chat_history = load_history()
 
-if its open_app, reply like this instead:
-open_app: <name of the app>
+# basically its personality, told to gemini once instead of stuffing it in every message
+system_msg = ("you are atlas, the users desktop assistant on windows. talk casually, not robotic. "
+              "only use a tool if they actually want something done on the pc, otherwise just reply normally. "
+              "remember stuff from earlier in the convo, including past sessions, so you can handle follow ups "
+              "like 'time it' or 'do that again' or 'what did i say about x'. "
+              "keep it short, 1-3 sentences, this basically gets read out loud")
 
-if its closing/killing an app, reply like this:
-close_app: <name of the app>
+def talk_to_atlas(user_text):
+    chat_history.append({"role": "user", "parts": [{"text": user_text}]})
 
-if its schedule_meeting, reply like this instead:
-schedule_meeting: <when they said, eg "tomorrow at 3pm">|<short title for the meeting>
+    res = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=chat_history,
+        config={"tools": [{"function_declarations": tools}], "system_instruction": system_msg},
+    )
 
-if its a web search request, or asking about something real-time/current
-(weather, news, prices, scores, "whats the time in X" etc), reply like this:
-search: <search term>
+    parts = res.candidates[0].content.parts
+    reply = ""
+    did_stuff = []
 
-if its a general knowledge question you can just answer directly
-(not needing live info, not an app command), reply like this:
-answer: <the original question>
+    for p in parts:
+        call = getattr(p, "function_call", None)
+        if call:
+            fn = call.name
+            args = dict(call.args) if call.args else {}
+            if fn in tool_functions:
+                try:
+                    r = tool_functions[fn](**args)
+                except Exception as e:
+                    r = f"that broke: {e}"
+                did_stuff.append(f"{fn} -> {r}")
 
-if its setting volume, reply like this:
-set_volume: <number 0-100>
+        if getattr(p, "text", None):
+            reply += p.text
 
-if its setting brightness, reply like this:
-set_brightness: <number 0-100>
+    chat_history.append({"role": "model", "parts": [{"text": reply or " ; ".join(did_stuff) or "ok"}]})
 
-if user wants something written/drafted (email, essay, message, letter, etc), reply like this:
-draft: <what they want written, keep their original request/topic intact>
+    if len(chat_history) > 60:
+        del chat_history[:2]  # dont let this grow forever
 
-message: "{text}"
-"""
-    res = client.models.generate_content(model="gemini-3.1-flash-lite", contents=prompt)
-    return res.text.strip().lower()
+    save_history()
+
+    if reply:
+        return reply
+    if did_stuff:
+        return " and ".join(x.split(" -> ", 1)[1] for x in did_stuff)
 
 
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
