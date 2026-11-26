@@ -422,6 +422,9 @@ tools = [
 
 tool_functions = {
     "open_app": lambda query: find_and_open_app(query),
+    "close_app": lambda query: close_app(query),
+    "find_and_open_file": lambda query: find_and_open_file(query),
+    "open_last_file": lambda: open_last_file(),
 }
 
 
