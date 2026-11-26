@@ -151,3 +151,6 @@ def find_and_open_app(query):
             return f"opening {n}"
 
     names = [n for n, p in shortcuts]
+    match = difflib.get_close_matches(query, names, n=3, cutoff=config.app_open_cutoff)
+    if not match:
+        return f"couldnt find an app matching '{query}'"
