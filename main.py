@@ -225,6 +225,9 @@ def set_volume(level):
     vol = get_volume_interface()
     vol.SetMasterVolumeLevelScalar(level / 100, None)
     return f"volume set to {level}%"
+
+def mute_toggle():
+    vol = get_volume_interface()
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
