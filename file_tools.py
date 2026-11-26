@@ -55,3 +55,9 @@ def type_in_discord(text):
 def open_camera():
     os.startfile("microsoft.windows.camera:")
     return "opening camera"
+
+
+def open_downloads():
+    dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
+    os.startfile(dl_path)
+    return "opening downloads folder"
