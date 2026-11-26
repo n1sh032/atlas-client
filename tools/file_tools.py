@@ -166,7 +166,9 @@ def close_app(query):
     import win32gui
     import win32process
 
-    clean = [r[:-4] if r.lower().endswith(".exe") else r for r in running]
+    name = query.strip().lower().removesuffix(".exe")
+    if not name:
+        return "Say the exact app name to close."
 
     for orig, c in zip(running, clean):
         if query.lower() in c.lower():
