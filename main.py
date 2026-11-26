@@ -142,6 +142,8 @@ def find_and_open_app(query):
     if "spotify" in query:
         os.startfile("spotify:")
         return "opening spotify"
+    if "camera" in query:
+        return open_camera()
 
     start_menu_dirs = [
         os.path.join(os.environ["ProgramData"], "Microsoft", "Windows", "Start Menu", "Programs"),
