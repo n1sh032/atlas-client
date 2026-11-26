@@ -76,6 +76,24 @@ def find_and_open_file(query):
             return f"opening {n}"
 
 
+def get_calendar_service():
+    creds = None
+    if os.path.exists("token.pickle"):
+        with open("token.pickle", "rb") as f:
+            creds = pickle.load(f)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open("token.pickle", "wb") as f:
+            pickle.dump(creds, f)
+
+    return build("calendar", "v3", credentials=creds)
+
+
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
