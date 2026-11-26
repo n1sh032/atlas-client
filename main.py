@@ -245,8 +245,6 @@ actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
     "cmd": open_cmd,
-    "spotify": open_spotify,
-    "vscode": open_vscode,
     "explorer": open_explorer,
 }
 
