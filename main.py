@@ -196,9 +196,9 @@ def close_app(query):
     if not match:
         return f"couldnt find a running app matching '{query}'"
 
-    for original, clean in zip(running, running_clean):
-        if clean.lower() == match[0]:
-            subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
+    for orig, c in zip(running, clean):
+        if c.lower() == match[0]:
+            subprocess.run(["taskkill", "/IM", orig, "/F"], capture_output=True)
             return f"closed {original}"
 
 
