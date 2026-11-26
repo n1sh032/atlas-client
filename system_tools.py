@@ -109,3 +109,6 @@ def send_app_shortcut(app_name, action):
     windows = [w for w in gw.getAllTitles() if app_name in w.lower()]
     if not windows:
         return f"{app_name} isnt open"
+    win = gw.getWindowsWithTitle(windows[0])[0]
+    if win.isMinimized:
+        win.restore()
