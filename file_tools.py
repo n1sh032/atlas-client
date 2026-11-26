@@ -10,3 +10,9 @@ import pyautogui
 import psutil
 
 import config
+
+
+def open_notepad():
+    subprocess.Popen(["notepad.exe"])
+    return "opening notepad"
+
