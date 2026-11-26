@@ -572,7 +572,7 @@ def listen_for_command():
         print("atlas: didnt catch that")
         return None
     except sr.WaitTimeoutError:
-        print("atlas: no command heard, going back to sleep")
+        print("atlas: didnt hear anything, going back to sleep")
         return None
 
 
