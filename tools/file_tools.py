@@ -180,7 +180,9 @@ def close_app(query):
     def find_window(hwnd, _):
         if win32gui.IsWindowVisible(hwnd):
             _, pid = win32process.GetWindowThreadProcessId(hwnd)
-            return f"closed {orig}"
+            if pid in pids:
+                windows.append(hwnd)
+        return True
 
     match = difflib.get_close_matches(query.lower(), [c.lower() for c in clean], n=1, cutoff=config.app_close_cutoff)
     if not match:
