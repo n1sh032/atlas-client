@@ -106,3 +106,6 @@ def find_and_open_file(query):
             if os.path.isfile(full):
                 files.append((name, full))
 
+    if not files:
+        return "no files to search"
+
