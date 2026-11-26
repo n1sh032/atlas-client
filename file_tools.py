@@ -7,3 +7,6 @@ import difflib
 import time
 import pygetwindow as gw
 import pyautogui
+import psutil
+
+import config
