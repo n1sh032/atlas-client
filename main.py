@@ -508,6 +508,9 @@ def talk_to_atlas(user_text):
         return reply
     if did_stuff:
         return " and ".join(x.split(" -> ", 1)[1] for x in did_stuff)
+    return "done"
+
+
 
 
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
