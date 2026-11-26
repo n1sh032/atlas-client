@@ -246,6 +246,8 @@ actions = {
     "downloads": open_downloads,
     "cmd": open_cmd,
     "explorer": open_explorer,
+    "lock_screen": lock_screen,
+    "mute": mute_toggle,
 }
 
 exact = {
