@@ -10,6 +10,9 @@ def main():
             print("shutting down")
             break
 
+        elif cmd == "open notepad":
+            subprocess.Popen(["notepad.exe"])
+            print("Atlas: opening notepad")
 
 if __name__ == "__main__":
     main()
