@@ -165,6 +165,12 @@ message: "{text}"
 oww_model = Model(wakeword_models=["hey_jarvis"], inference_framework="onnx")
 recognizer = sr.Recognizer()
 
+def listen_for_wakeword():
+    audio = pyaudio.PyAudio()
+    stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
+                         input=True, frames_per_buffer=1280)
+
+    print("listening for 'hey jarvis'...")
 def main():
     print("atlas is online. type exit to quit")
     while True:
