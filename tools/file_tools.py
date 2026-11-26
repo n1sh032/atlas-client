@@ -46,3 +46,6 @@ def type_in_discord(text):
     active = gw.getActiveWindow()
     if not active or "discord" not in active.title.lower():
         return "couldnt focus discord, didnt type anything"
+    pyautogui.write(text, interval=0.02)
+    pyautogui.press("enter")
+    return f"sent to discord: {text}"
