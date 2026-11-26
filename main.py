@@ -180,6 +180,9 @@ def listen_for_wakeword():
             if score > 0.5:
                 stream.stop_stream()
                 stream.close()
+                audio.terminate()
+                return
+
 def main():
     print("atlas is online. type exit to quit")
     while True:
