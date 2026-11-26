@@ -42,9 +42,6 @@ def open_cmd():
     subprocess.Popen(["cmd.exe"])
     return "opening cmd"
 
-def open_spotify():
-    os.startfile("spotify:")
-    return "opening spotify"
 
 def open_vscode():
     subprocess.Popen(["code"])
