@@ -34,6 +34,7 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
+HISTORY_FILE = "atlas_memory.json"
 
 
 def open_notepad():
