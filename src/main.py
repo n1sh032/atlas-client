@@ -25,3 +25,6 @@ def main():
         if not cmd:
             continue
 
+        if cmd.strip().lower() == "exit":
+            print("shutting down")
+            save_history()
