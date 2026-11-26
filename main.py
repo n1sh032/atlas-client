@@ -5,6 +5,8 @@ import pickle
 import dateparser
 import numpy as np
 import sys
+import webbrowser
+import psutil
 import pyaudiowpatch as pyaudio
 sys.modules["pyaudio"] = pyaudio
 import speech_recognition as sr
