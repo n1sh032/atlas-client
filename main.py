@@ -74,6 +74,9 @@ def type_in_discord(text):
     pyautogui.press("enter")
     return f"sent to discord: {text}"
 
+def open_camera():
+    os.startfile("microsoft.windows.camera:")
+
 def open_downloads():
     dl_path = os.path.join(os.path.expanduser("~"), "Downloads")
     os.startfile(dl_path)
