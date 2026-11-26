@@ -145,3 +145,6 @@ def find_and_open_app(query):
         return "cant find any installed apps"
 
     # substring check first, way more reliable than fuzzy for app names
+    for n, p in shortcuts:
+        if query in n.lower():
+            os.startfile(p)
