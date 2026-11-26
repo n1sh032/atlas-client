@@ -123,7 +123,7 @@ def find_and_open_file(query):
                 files.append((name, full))
 
     if not files:
-        return "no files found to search"
+        return "no files to search"
 
     names = [n for n, p in files]
     match = difflib.get_close_matches(query, names, n=1, cutoff=0.3)
