@@ -139,6 +139,9 @@ def close_app(query):
     for original, clean in zip(running, running_clean):
         if clean.lower() == match[0]:
             subprocess.run(["taskkill", "/IM", original, "/F"], capture_output=True)
+            return f"closed {original}"
+
+
 
 
 def get_calendar_service():
