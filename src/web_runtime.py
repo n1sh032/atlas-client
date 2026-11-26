@@ -106,3 +106,6 @@ def serve(application, assets, name, port):
                 else:
                     state.update(busy=True, error=None)
                     accepted = True
+            if not accepted:
+                self.reply(409, {"error": "Wait for the current operation to finish."})
+                return
