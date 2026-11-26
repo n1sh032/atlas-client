@@ -69,6 +69,7 @@ def find_and_open_file(query):
             os.startfile(p)
             return f"opening {n}"
 
+
 actions = {
     "notepad": open_notepad,
     "downloads": open_downloads,
