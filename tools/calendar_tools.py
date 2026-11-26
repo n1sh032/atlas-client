@@ -31,3 +31,6 @@ def get_calendar_service():
 
     return build("calendar", "v3", credentials=creds)
 
+
+def schedule_meeting(when_text, title):
+    service = get_calendar_service()
